@@ -1,0 +1,17 @@
+.icon-size-large{
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.icon-size-small{
+    height: 1rem;
+    width: 1rem;
+}
+
+.button-outlined{
+    font-weight: 1000;
+}
+
+.logo{
+    cursor: pointer;
+}
