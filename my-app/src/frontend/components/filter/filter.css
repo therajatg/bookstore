@@ -1,0 +1,29 @@
+.filters{
+    display: flex;
+    flex-direction: column;
+    color: var(--text-and-background-color);
+    position: fixed;
+    box-shadow: var(--default-box-shadow);
+    padding-left: 2rem;
+    border-radius: 0.5rem;
+    width: 20%;
+    height: 82%;
+    overflow: auto;
+    font-weight: 600;
+}
+
+ul{
+    padding-inline-start: 0;
+}
+
+.button-contained{
+    margin-top: 10%;
+}
+
+input[type="range"]{
+    width: 90%;
+}
+
+.see-more{
+    color: var(--primary-color);
+}

@@ -1,5 +1,5 @@
 import { FcSearch } from 'react-icons/fc';
-import { AiFillBook, AiFillHeart } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
 import { FaBookOpen, FaShoppingCart } from 'react-icons/fa';
 import "./navbar.css"
 

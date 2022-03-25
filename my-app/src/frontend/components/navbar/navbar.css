@@ -15,3 +15,21 @@
 .logo{
     cursor: pointer;
 }
+
+.navigation-container{
+    background-color: var(--text-and-background-color);
+    width: 100%;
+    position: fixed;
+}
+
+.logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.helloUser{
+    display: flex;
+    flex-direction: column;
+}
