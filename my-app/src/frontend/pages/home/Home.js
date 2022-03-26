@@ -1,13 +1,13 @@
 import './home.css';
-import {Navbar} from '../.././components/navbar/Navbar'
 import {Products} from '../.././components/products/Products'
+import {Filter} from '../.././components/filter/Filter'
 
 
 function Home() {
   return (
-    <div>
-        <Navbar/>
-        <Products/>
+    <div className='sidebar-and-products'>
+          <Filter/>
+          <Products/>
     </div>
   )
 }
