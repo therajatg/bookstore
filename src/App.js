@@ -8,7 +8,7 @@ import {Footer} from './frontend/components/footer/Footer'
 function App() {
   return (
     <div className="App">
-      <Navbar/>
+      {/* <Navbar/> */}
       <Routes>
         <Route path="/" element={<Home/>}/>
         {/* <Route path="/cart" element={<Cart/>}/>
@@ -17,7 +17,7 @@ function App() {
         <Route path="/signup" element={<Signup/>}/> */}
         <Route path="/test-api" element={<Mockman/>}/>
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }
