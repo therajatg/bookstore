@@ -5,6 +5,7 @@
   "dependencies": {
     "cloudinary": "^1.28.1",
     "dayjs": "^1.11.0",
+    "faker": "^6.6.6",
     "jwt-decode": "^3.1.2",
     "jwt-encode": "^1.0.1",
     "miragejs": "^0.1.43",
