@@ -11,6 +11,15 @@
   height: 60%;
 }
 
+.card-container {
+  width: 18rem;
+  box-shadow: var(--default-box-shadow);
+}
+
+.card-container:hover {
+  box-shadow: var(--hover-box-shadow);
+}
+
 .rating {
   background-color: var(--primary-color-light);
   color: var(--secondary-color);

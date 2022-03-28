@@ -72,9 +72,9 @@ function ratingFilter(productListing, state) {
 function priceSort(productListing, state) {
   switch (state.sortByPrice) {
     case "LOW_TO_HIGH":
-      return productListing.sort((a, b) => a.price - b.price);
+      return [...productListing].sort((a, b) => a.price - b.price);
     case "HIGH_TO_LOW":
-      return productListing.sort((a, b) => b.price - a.price);
+      return [...productListing].sort((a, b) => b.price - a.price);
     default:
       return productListing;
   }
