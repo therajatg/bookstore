@@ -1,16 +1,18 @@
-.footer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    background-color: var(--text-and-background-color);
-    color: var(--secondary-color);
-    font-family: var(--general-font);
-    position: relative;
-    z-index: 1;
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: var(--text-and-background-color);
+  color: var(--secondary-color);
+  font-family: var(--general-font);
+  position: relative;
+  width: 100%;
+  /* margin-bottom: 0; */
+  z-index: 1;
 }
 
-.footer-header{
-    text-decoration: underline;
-    margin-bottom: 10px;
-    font-weight: 600;
+.footer-header {
+  text-decoration: underline;
+  margin-bottom: 10px;
+  font-weight: 600;
 }

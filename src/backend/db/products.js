@@ -12,8 +12,9 @@ export const products = [
     title: "The Book of Longings",
     author: "Sue Monk Kidd",
     rating: 4.5,
+    fastDelivery: false,
     price: 699,
-    categoryName: "Literature & Fiction",
+    categoryName: "LITERATURE_AND_FICTION",
   },
   {
     _id: uuid(),
@@ -21,8 +22,9 @@ export const products = [
     title: "You are Winner",
     author: "Junaid Qureshi",
     rating: 5.0,
+    fastDelivery: true,
     price: 860,
-    categoryName: "horror",
+    categoryName: "BIOGRAPHIES",
   },
   {
     _id: uuid(),
@@ -30,8 +32,9 @@ export const products = [
     title: "Think and Grow Rich",
     author: "Shiv Khera",
     rating: 5.0,
+    fastDelivery: true,
     price: 1000,
-    categoryName: "fiction",
+    categoryName: "LITERATURE_AND_FICTION",
   },
 
   {
@@ -40,8 +43,9 @@ export const products = [
     title: "Think and Grow Rich",
     author: "Shiv Khera",
     rating: 4.0,
+    fastDelivery: true,
     price: 850,
-    categoryName: "fiction",
+    categoryName: "LITERATURE_AND_FICTION",
   },
 
   {
@@ -50,8 +54,9 @@ export const products = [
     title: "Think and Grow Rich",
     author: "Shiv Khera",
     rating: 4.5,
+    fastDelivery: false,
     price: 1000,
-    categoryName: "fiction",
+    categoryName: "LITERATURE_AND_FICTION",
   },
 
   {
@@ -60,8 +65,9 @@ export const products = [
     title: "Think and Grow Rich",
     author: "Shiv Khera",
     rating: 4.0,
+    fastDelivery: true,
     price: 420,
-    categoryName: "fiction",
+    categoryName: "LITERATURE_AND_FICTION",
   },
 
   {
@@ -70,8 +76,9 @@ export const products = [
     title: "Think and Grow Rich",
     author: "Shiv Khera",
     rating: 5.0,
+    fastDelivery: true,
     price: 670,
-    categoryName: "fiction",
+    categoryName: "LITERATURE_AND_FICTION",
   },
 
   {
@@ -80,7 +87,8 @@ export const products = [
     title: "Think and Grow Rich",
     author: "Shiv Khera",
     rating: 3.5,
+    fastDelivery: false,
     price: 240,
-    categoryName: "fiction",
-  }
+    categoryName: "LITERATURE_AND_FICTION",
+  },
 ];
