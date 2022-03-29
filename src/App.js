@@ -1,5 +1,7 @@
 import "./App.css";
+import { Cart } from "./frontend/pages/cart/cart";
 import { Home } from "./frontend/pages/home/Home";
+import { Wishlist } from "./frontend/pages/wishlist/Wishlist";
 import Mockman from "mockman-js";
 import { Route, Routes } from "react-router-dom";
 import { Navbar } from "./frontend/components/navbar/Navbar";
@@ -11,10 +13,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/cart" element={<Cart/>}/>
-        <Route path="/wishlist" element={<Wishlist/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/signup" element={<Signup/>}/> */}
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        {/* <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />  */}
         <Route path="/test-api" element={<Mockman />} />
       </Routes>
       <Footer />

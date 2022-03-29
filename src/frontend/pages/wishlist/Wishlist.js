@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import styles from "./products.module.css";
+import styles from "../../components/products/products.module.css";
+import sty from "../cart/cart.module.css";
+import wishlistStyle from "./wishlist.module.css";
 import { useFilter } from "../../contexts/filterContext";
 
-export function Products() {
+function Wishlist() {
   const { finalProductList } = useFilter();
-
   return (
-    <div className={styles.productGrid}>
+    <div
+      className={`${styles.productGrid} ${sty.productGrid} ${wishlistStyle.productGrid}`}
+    >
       {finalProductList.map(
         ({ img, title, author, rating, fastDelivery, price }) => (
-          <div className={`card-container ${styles.cardContainer}`}>
+          <div className={`${styles.cardContainer} card-container`}>
             <img className={styles.imgDimension} src={img} />
             <h3 className="margin-zero">{title}</h3>
             <h6 className="margin-one">by {author}</h6>
@@ -27,11 +28,8 @@ export function Products() {
                 {Math.round((368 * 100) / price)}%off
               </span>
             </span>
-            <a
-              href="#"
-              className="button-contained add-to-cart-button margin-one"
-            >
-              Add To Cart
+            <a href="#" className="button-contained delete-button">
+              Remove
             </a>
           </div>
         )
@@ -39,3 +37,5 @@ export function Products() {
     </div>
   );
 }
+
+export { Wishlist };
