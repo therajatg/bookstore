@@ -7,6 +7,7 @@
   --primary-color-light: #60a2f6;
   --text-and-background-color: #121212;
   --secondary-color: #f3f4f6;
+  --line-color: #121212;
   --stylish-font: "Spirax", cursive;
   --general-font: "Lato", sans-serif;
   --default-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -23,7 +24,7 @@
   .line{
     height: 0.5px;
     width: 100%;
-    background-color: #121212;
+    background-color: var(--line-color);
   }
 
 .button-contained{
