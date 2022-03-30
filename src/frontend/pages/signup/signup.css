@@ -1,14 +1,10 @@
 .ecom-placing-input-container {
-  /* height: 100vh; */
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-self: center; */
   row-gap: 3rem;
   width: 25%;
   letter-spacing: 0.3rem;
   background: transparent;
-  /* justify-self: center; */
 }
 
 .ecom-center-inside-flex {
