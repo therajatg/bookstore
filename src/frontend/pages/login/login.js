@@ -35,7 +35,7 @@ function Login() {
       >
         <h1 className="ecom-center-inside-flex">Login</h1>
         <div className="input-name">
-          <label for="email">EMAIL:</label>
+          <label htmlFor="email">EMAIL:</label>
           <input
             type="email"
             id="email"
@@ -47,7 +47,7 @@ function Login() {
           />
         </div>
         <div className="input-password">
-          <label for="password">PASSWORD:</label>
+          <label htmlFor="password">PASSWORD:</label>
           <input
             type="password"
             id="password"

@@ -9,8 +9,8 @@ export function Products() {
   return (
     <div className={styles.productGrid}>
       {finalProductList.map(
-        ({ img, title, author, rating, fastDelivery, price }) => (
-          <div className={`card-container ${styles.cardContainer}`}>
+        ({ _id, img, title, author, rating, fastDelivery, price }) => (
+          <div className={`card-container ${styles.cardContainer}`} key={_id}>
             <img className={styles.imgDimension} src={img} />
             <h3 className="margin-zero">{title}</h3>
             <h6 className="margin-one">by {author}</h6>
