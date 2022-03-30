@@ -1,9 +1,5 @@
 import "./App.css";
-import { Cart } from "./frontend/pages/cart/cart";
-import { Home } from "./frontend/pages/home/Home";
-import { Signup } from "./frontend/pages/signup/signup";
-import { Wishlist } from "./frontend/pages/wishlist/Wishlist";
-import { Login } from "./frontend/pages/login/login";
+import { Wishlist, Cart, Home, Login, Signup } from "./frontend/pages/index";
 import Mockman from "mockman-js";
 import { Route, Routes } from "react-router-dom";
 import { Navbar } from "./frontend/components/navbar/Navbar";

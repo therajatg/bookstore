@@ -11,7 +11,6 @@ function Signup() {
 
   const formSignupHandler = async (e) => {
     e.preventDefault();
-    console.log(e);
     try {
       const response = await axios.post("/api/auth/signup", {
         firstName: user.firstName,
@@ -19,7 +18,6 @@ function Signup() {
         email: user.email,
         password: user.password,
       });
-      console.log(user.firstName);
       localStorage.setItem("token", response.data.encodedToken);
       authDispatch({
         authType: "TOKEN",
@@ -40,7 +38,7 @@ function Signup() {
       >
         <h2 className="ecom-center-inside-flex">CREATE ACCOUNT</h2>
         <div className="input-name">
-          <label for="firstName">FIRST NAME:</label>
+          <label htmlFor="firstName">FIRST NAME:</label>
           <input
             type="text"
             id="firstName"
@@ -56,7 +54,7 @@ function Signup() {
           />
         </div>
         <div className="input-password">
-          <label for="lastName">LAST NAME:</label>
+          <label htmlFor="lastName">LAST NAME:</label>
           <input
             type="text"
             id="lastName"
@@ -72,7 +70,7 @@ function Signup() {
           />
         </div>
         <div className="input-name">
-          <label for="email">EMAIL:</label>
+          <label htmlFor="email">EMAIL:</label>
           <input
             type="email"
             id="email"
@@ -85,7 +83,7 @@ function Signup() {
           />
         </div>
         <div className="input-password">
-          <label for="password">PASSWORD:</label>
+          <label htmlFor="password">PASSWORD:</label>
           <input
             type="password"
             id="password"
@@ -101,7 +99,7 @@ function Signup() {
           />
         </div>
         <div className="input-password">
-          <label for="confirmPassword">RE-ENTER PASSWORD:</label>
+          <label htmlFor="confirmPassword">RE-ENTER PASSWORD:</label>
           <input
             type="password"
             id="confirmPassword"
