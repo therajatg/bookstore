@@ -4,18 +4,20 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
-import { FilterProvider } from "./frontend/contexts/filterContext";
-import { AuthProvider } from "./frontend/contexts/authContext";
-import { CartProvider } from "./frontend/contexts/cartContext";
-import { WishlistProvider } from "./frontend/contexts/wishlistContext";
+import {
+  WishlistProvider,
+  CartProvider,
+  FilterProvider,
+  AuthProvider,
+} from "./frontend/contexts/index";
 
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
+    <AuthProvider>
+      <BrowserRouter>
         <FilterProvider>
           <CartProvider>
             <WishlistProvider>
@@ -23,8 +25,8 @@ ReactDOM.render(
             </WishlistProvider>
           </CartProvider>
         </FilterProvider>
-      </AuthProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

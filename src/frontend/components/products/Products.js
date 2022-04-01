@@ -1,41 +1,105 @@
 import styles from "./products.module.css";
-import { useFilter } from "../../contexts/filterContext";
-import { useCart } from "../../contexts/cartContext";
-import { useEffect } from "react";
+import { useFilter, useAuth, useCart, useWishlist } from "../../contexts/index";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AiFillHeart } from "react-icons/ai";
 
 export function Products() {
-  const encodedToken = localStorage.getItem("token");
+  const navigate = useNavigate();
   const { finalProductList } = useFilter();
+  const { authState } = useAuth();
+  const { token } = authState;
   const { setCartItems, cartItems } = useCart();
+  const { setWishlist, wishlist } = useWishlist();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await axios.post("/api/user/cart", {
-          headers: { authorization: encodedToken },
-        });
+  const addToCartHandler = async (product) => {
+    try {
+      const response = await axios.post(
+        "/api/user/cart",
+        {
+          product,
+        },
+        {
+          headers: { authorization: token },
+        }
+      );
+      if (response.status === 201) {
         setCartItems(response.data.cart);
-      } catch (error) {
-        console.log(error);
+        console.log(cartItems);
       }
-    })();
-  }, [cartItems]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  function cartItemHandler(_id) {
-    setCartItems((cartItems) => [
-      ...cartItems,
-      ...finalProductList.filter((item) => item._id === _id),
-    ]);
-    console.log(cartItems);
-  }
+  const addToWishlistHandler = async (product) => {
+    try {
+      const response = await axios.post(
+        "/api/user/wishlist",
+        {
+          product,
+        },
+        {
+          headers: { authorization: token },
+        }
+      );
+      setWishlist(response.data.wishlist);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeFromWishlistHandler = async (id) => {
+    try {
+      const response = await axios.delete(`/api/user/wishlist/${id}`, {
+        headers: { authorization: token },
+      });
+
+      setWishlist(response.data.wishlist);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={styles.productGrid}>
       {finalProductList.map(
-        ({ _id, img, title, author, rating, fastDelivery, price }) => (
+        ({
+          _id,
+          img,
+          title,
+          author,
+          rating,
+          fastDelivery,
+          price,
+          categoryName,
+        }) => (
           <div className={`card-container ${styles.cardContainer}`} key={_id}>
+            {wishlist.find((item) => item._id === _id) ? (
+              <AiFillHeart
+                className={`${styles.position} ${styles.redColor} icon-size-small`}
+                onClick={() => removeFromWishlistHandler(_id)}
+              />
+            ) : (
+              <AiFillHeart
+                className={`${styles.position} ${styles.whiteColor} icon-size-small`}
+                onClick={() =>
+                  addToWishlistHandler({
+                    _id,
+                    img,
+                    title,
+                    author,
+                    rating,
+                    fastDelivery,
+                    price,
+                    categoryName,
+                  })
+                }
+              />
+            )}
+
             <img className={styles.imgDimension} src={img} />
+
             <h3 className="margin-zero">{title}</h3>
             <h6 className="margin-one">by {author}</h6>
             <p className={`${styles.rating} margin-one`}>Rating: {rating}</p>
@@ -51,12 +115,34 @@ export function Products() {
                 {Math.round((368 * 100) / price)}%off
               </span>
             </span>
-            <button
-              className="button-contained add-to-cart-button margin-one font-size-s"
-              onClick={(_id) => cartItemHandler(_id)}
-            >
-              Add To Cart
-            </button>
+            {cartItems.find((item) => item._id === _id) ? (
+              <button
+                className="button-contained add-to-cart-button margin-one font-size-s"
+                onClick={() => navigate("/cart")}
+              >
+                Go To Cart
+              </button>
+            ) : (
+              <button
+                className="button-contained add-to-cart-button margin-one font-size-s"
+                onClick={() => {
+                  token
+                    ? addToCartHandler({
+                        _id,
+                        img,
+                        title,
+                        author,
+                        rating,
+                        fastDelivery,
+                        price,
+                        categoryName,
+                      })
+                    : navigate("/login");
+                }}
+              >
+                Add To Cart
+              </button>
+            )}
           </div>
         )
       )}

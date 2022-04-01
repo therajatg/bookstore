@@ -1,6 +1,6 @@
 .productGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-row-gap: 7rem;
   grid-column-gap: 7rem;
   color: var(--text-and-background-color);
@@ -11,10 +11,24 @@
   height: 60%;
 }
 
+.position {
+  position: absolute;
+  z-index: 1;
+}
+
+.redColor {
+  color: red;
+}
+
+.whiteColor {
+  color: white;
+}
+
 .cardContainer {
   width: auto;
   height: auto;
   box-shadow: var(--default-box-shadow);
+  position: relative;
 }
 
 .cardContainer:hover {

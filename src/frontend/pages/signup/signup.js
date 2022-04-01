@@ -1,18 +1,18 @@
-import { useAuth } from "../../contexts/authContext";
+import { useAuth } from "../../contexts/index";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
 
 function Signup() {
   const { authState, authDispatch } = useAuth();
-  const { user } = authState;
+  const { user, error } = authState;
 
   const navigate = useNavigate();
 
   const formSignupHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/auth/signup", {
+      const response = await axios.post(`/api/auth/signup`, {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
@@ -20,15 +20,26 @@ function Signup() {
       });
       localStorage.setItem("token", response.data.encodedToken);
       authDispatch({
-        authType: "TOKEN",
-        authPayload: response.data.encodedToken,
+        type: "TOKEN",
+        payload: response.data.encodedToken,
       });
-      navigate("/");
-    } catch (error) {
-      authDispatch({ authType: "ERROR", authPayload: true });
-      console.log(`Error: ${error}`);
+      navigate("/login");
+    } catch (err) {
+      authDispatch({
+        type: "ERROR",
+        payload: "Some error occurred, while trying to signup",
+      });
+      console.log(err);
     }
   };
+
+  setTimeout(() => {
+    if (error)
+      authDispatch({
+        type: "ERROR",
+        payload: null,
+      });
+  }, 3000);
 
   return (
     <div className="center">
@@ -47,8 +58,8 @@ function Signup() {
             required
             onChange={(e) =>
               authDispatch({
-                authType: "FIRST_NAME",
-                authPayload: e.target.value,
+                type: "FIRST_NAME",
+                payload: e.target.value,
               })
             }
           />
@@ -63,8 +74,8 @@ function Signup() {
             required
             onChange={(e) =>
               authDispatch({
-                authType: "LAST_NAME",
-                authPayload: e.target.value,
+                type: "LAST_NAME",
+                payload: e.target.value,
               })
             }
           />
@@ -78,7 +89,7 @@ function Signup() {
             placeholder="Email"
             required
             onChange={(e) =>
-              authDispatch({ authType: "EMAIL", authPayload: e.target.value })
+              authDispatch({ type: "EMAIL", payload: e.target.value })
             }
           />
         </div>
@@ -92,8 +103,8 @@ function Signup() {
             required
             onChange={(e) =>
               authDispatch({
-                authType: "PASSWORD",
-                authPayload: e.target.value,
+                type: "PASSWORD",
+                payload: e.target.value,
               })
             }
           />
@@ -108,8 +119,8 @@ function Signup() {
             required
             onChange={(e) =>
               authDispatch({
-                authType: "CONFIRM_PASSWORD",
-                authPayload: e.target.value,
+                type: "CONFIRM_PASSWORD",
+                payload: e.target.value,
               })
             }
           />
@@ -121,6 +132,7 @@ function Signup() {
           <h2>CREATE</h2>
         </button>
       </form>
+      <h4 className="error__message">{error}</h4>
     </div>
   );
 }

@@ -18,7 +18,7 @@ const useFilter = () => useContext(FilterContext);
 function FilterProvider({ children }) {
   const [productListing, setProductListing] = useState([]);
 
-  const [state, dispatch] = useReducer(filterReducer, {
+  const [filterState, filterDispatch] = useReducer(filterReducer, {
     range: 2000,
     categories: [],
     filterByRating: false,
@@ -32,17 +32,23 @@ function FilterProvider({ children }) {
     (async () => {
       try {
         const response = await axios.get("/api/products");
-        setProductListing([...response.data.products]);
+        setProductListing(response.data.products);
       } catch {
         console.log("Error");
       }
     })();
   }, []);
 
-  const finalProductList = compose(allfilterFunctions, state, productListing);
+  const finalProductList = compose(
+    allfilterFunctions,
+    filterState,
+    productListing
+  );
 
   return (
-    <FilterContext.Provider value={{ finalProductList, dispatch, state }}>
+    <FilterContext.Provider
+      value={{ finalProductList, filterDispatch, filterState }}
+    >
       {children}
     </FilterContext.Provider>
   );

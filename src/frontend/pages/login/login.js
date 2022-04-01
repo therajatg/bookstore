@@ -7,26 +7,39 @@ import axios from "axios";
 function Login() {
   const navigate = useNavigate();
   const { authState, authDispatch } = useAuth();
-  const { user } = authState;
+  const { user, error } = authState;
 
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/auth/login", {
+      const response = await axios.post(`/api/auth/login`, {
         email: user.email,
         password: user.password,
       });
       localStorage.setItem("token", response.data.encodedToken);
       authDispatch({
-        authType: "TOKEN",
-        authPayload: response.data.encodedToken,
+        type: "TOKEN",
+        payload: response.data.encodedToken,
       });
       navigate("/");
-    } catch (error) {
-      authDispatch({ authType: "ERROR", authPayload: true });
-      console.log(`Error: ${error}`);
+    } catch (err) {
+      authDispatch({
+        type: "ERROR",
+        payload:
+          "Wrong Email or Pssword, signup if you don't have account with us",
+      });
+      console.log(err);
     }
   };
+
+  setTimeout(() => {
+    if (error)
+      authDispatch({
+        type: "ERROR",
+        payload: null,
+      });
+  }, 3000);
+
   return (
     <div className="center">
       <form
@@ -42,7 +55,7 @@ function Login() {
             className="name-input-field"
             required
             onChange={(e) =>
-              authDispatch({ authType: "EMAIL", authPayload: e.target.value })
+              authDispatch({ type: "EMAIL", payload: e.target.value })
             }
           />
         </div>
@@ -55,8 +68,8 @@ function Login() {
             required
             onChange={(e) =>
               authDispatch({
-                authType: "PASSWORD",
-                authPayload: e.target.value,
+                type: "PASSWORD",
+                payload: e.target.value,
               })
             }
           />
@@ -66,7 +79,7 @@ function Login() {
           type="submit"
           className="btn-no-border-no-color ecom-center-inside-flex"
         >
-          <h2>Sign In</h2>
+          <h2>Log In</h2>
         </button>
         <Link to="/signup" className="ecom-center-inside-flex">
           Create Account
