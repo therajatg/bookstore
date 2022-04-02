@@ -1,36 +1,36 @@
-function authReducer(authState, authAction) {
-  switch (authAction.type) {
+function authReducer(state, action) {
+  switch (action.type) {
     case "FIRST_NAME":
       return {
-        ...authState,
-        user: { ...authState.user, firstName: authAction.authPayload },
+        ...state,
+        user: { ...state.user, firstName: action.payload },
       };
     case "LAST_NAME":
       return {
-        ...authState,
-        user: { ...authState.user, lastName: authAction.authPayload },
+        ...state,
+        user: { ...state.user, lastName: action.payload },
       };
     case "EMAIL":
       return {
-        ...authState,
-        user: { ...authState.user, email: authAction.authPayload },
+        ...state,
+        user: { ...state.user, email: action.payload },
       };
     case "PASSWORD":
       return {
-        ...authState,
-        user: { ...authState.user, password: authAction.authPayload },
+        ...state,
+        user: { ...state.user, password: action.payload },
       };
     case "CONFIRM_PASSWORD":
       return {
-        ...authState,
-        user: { ...authState.user, password: authAction.authPayload },
+        ...state,
+        user: { ...state.user, confirmPassword: action.payload },
       };
     case "TOKEN":
-      return { ...authState, token: authAction.authPayload };
+      return { ...state, token: action.payload };
     case "ERROR":
-      return { ...authState, error: authAction.authPayload };
+      return { ...state, error: action.payload };
     default:
-      return authState;
+      return state;
   }
 }
 

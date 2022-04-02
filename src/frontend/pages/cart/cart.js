@@ -1,15 +1,18 @@
-import { useFilter } from "../../contexts/filterContext";
+// import { useFilter } from "../../contexts/filterContext";
+import { useCart } from "../../contexts/index";
 import styles from "../../components/products/products.module.css";
 import sty from "./cart.module.css";
 
 export function Cart() {
-  const { finalProductList } = useFilter();
+  // const { finalProductList } = useFilter();
+  const { cartItems } = useCart();
+  console.log(cartItems);
 
   return (
     <div className={sty.cartAndPriceDetails}>
       <div>
         <div className={`${styles.productGrid} ${sty.productGrid}`}>
-          {finalProductList.map(
+          {cartItems.map(
             ({ img, title, author, rating, fastDelivery, price }) => (
               <div className={`${styles.cardContainer} card-container`}>
                 <img className={styles.imgDimension} src={img} />
