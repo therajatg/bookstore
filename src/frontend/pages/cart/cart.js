@@ -1,19 +1,68 @@
-// import { useFilter } from "../../contexts/filterContext";
-import { useCart } from "../../contexts/index";
+import { useCart, useAuth } from "../../contexts/index";
+// import { useState } from "react";
 import styles from "../../components/products/products.module.css";
 import sty from "./cart.module.css";
+import axios from "axios";
 
 export function Cart() {
-  // const { finalProductList } = useFilter();
-  const { cartItems } = useCart();
-  console.log(cartItems);
+  const { setCartItems, cartItems } = useCart();
+  const { token } = useAuth();
+  const encodedToken = localStorage.getItem("token");
+
+  const removeFromCartHandler = async (id) => {
+    try {
+      const response = await axios.delete(`/api/user/cart/${id}`, {
+        headers: { authorization: encodedToken },
+      });
+      setCartItems(response.data.cart);
+      console.log(token);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const incrementItem = async (id) => {
+    try {
+      const response = await axios.post(
+        `/api/user/cart/${id}`,
+        {
+          action: { type: "increment" },
+        },
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      setCartItems(response.data.cart);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const decrementItem = async (id, qty) => {
+    if (qty > 3) {
+      try {
+        const response = await axios.post(
+          `/api/user/cart/${id}`,
+          {
+            action: { type: "decrement" },
+          },
+          {
+            headers: { authorization: encodedToken },
+          }
+        );
+        setCartItems(response.data.cart);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   return (
     <div className={sty.cartAndPriceDetails}>
       <div>
         <div className={`${styles.productGrid} ${sty.productGrid}`}>
           {cartItems.map(
-            ({ img, title, author, rating, fastDelivery, price }) => (
+            ({ img, title, author, rating, fastDelivery, price, _id, qty }) => (
               <div className={`${styles.cardContainer} card-container`}>
                 <img className={styles.imgDimension} src={img} />
                 <h3 className="margin-zero">{title}</h3>
@@ -37,17 +86,26 @@ export function Cart() {
                 </span>
                 <div className="line"></div>
                 <h2>
-                  <button className={`${sty.btn} font-size-m round-corner`}>
+                  <button
+                    className={`${sty.btn} font-size-m round-corner`}
+                    onClick={() => decrementItem(_id, qty)}
+                  >
                     -
                   </button>
-                  <button className={`${sty.btn} font-size-m`}>1</button>
-                  <button className={`${sty.btn} font-size-m round-corner`}>
+                  <input type="number" value={qty} />
+                  <button
+                    className={`${sty.btn} font-size-m round-corner`}
+                    onClick={() => incrementItem(_id, qty)}
+                  >
                     +
                   </button>
                 </h2>
-                <a href="#" className="button-contained delete-button">
+                <div
+                  className="button-contained delete-button"
+                  onClick={() => removeFromCartHandler(_id)}
+                >
                   Remove
-                </a>
+                </div>
               </div>
             )
           )}
@@ -70,4 +128,26 @@ export function Cart() {
       </div>
     </div>
   );
+}
+
+{
+  /* <h2>
+                  <button
+                    className={`${sty.btn} font-size-m round-corner`}
+                    onClick={(_id, qty) =>
+                      numberOfItemsInCart(_id, qty, "minus")
+                    }
+                  >
+                    -
+                  </button>
+                  <input type="number" value={qty} />
+                  <button
+                    className={`${sty.btn} font-size-m round-corner`}
+                    onClick={(_id, qty) =>
+                      numberOfItemsInCart(_id, qty, "plus")
+                    }
+                  >
+                    +
+                  </button>
+                </h2> */
 }
