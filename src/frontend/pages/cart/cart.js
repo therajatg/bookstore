@@ -6,8 +6,19 @@ import axios from "axios";
 export function Cart() {
   const { setCartItems, cartItems } = useCart();
   const { setWishlist, wishlist } = useWishlist();
-  const { token } = useAuth();
   const encodedToken = localStorage.getItem("token");
+
+  const totalOldPrice = cartItems.reduce(
+    (acc, current) => acc + current.oldPrice * current.qty,
+    0
+  );
+
+  const totalPrice = cartItems.reduce(
+    (acc, current) => acc + current.price * current.qty,
+    0
+  );
+
+  const totalDiscount = totalOldPrice - totalPrice;
 
   const removeFromCart = async (id) => {
     try {
@@ -95,6 +106,7 @@ export function Cart() {
               author,
               rating,
               fastDelivery,
+              oldPrice,
               price,
               _id,
               qty,
@@ -114,11 +126,9 @@ export function Cart() {
                 </h4>
                 <span className={`margin-one ${styles.flexSpaceBetween}`}>
                   <span className={styles.fontPrice}>&#8377;{price}</span>
-                  <del className="margin-one gray-text">
-                    &#8377;{price + 368}
-                  </del>
+                  <del className="margin-one gray-text">&#8377;{oldPrice}</del>
                   <span className={`${styles.off} font-size-xs`}>
-                    {Math.round((368 * 100) / price)}%off
+                    {Math.round(((oldPrice - price) * 100) / oldPrice)}%off
                   </span>
                 </span>
                 <div className="line"></div>
@@ -164,6 +174,7 @@ export function Cart() {
                         price,
                         _id,
                         categoryName,
+                        oldPrice,
                       });
                       removeFromCart(_id);
                     }}
@@ -178,17 +189,17 @@ export function Cart() {
       </div>
       <div className={sty.priceDetails}>
         <div>
-          <p>Price (2 items)</p>
+          <p>{`Price ${cartItems.length} items)`}</p>
           <p>Discount</p>
           <p>Delivery Charges</p>
           <h3>Total Amount</h3>
-          <p>You will save ₹2,974 on this order</p>
+          <p>{`You will save ₹${totalDiscount} on this order`}</p>
         </div>
         <div>
-          <p>3997</p>
-          <p>2899</p>
+          <p>{totalOldPrice}</p>
+          <p>{totalDiscount}</p>
           <p>FREE</p>
-          <h3>1023</h3>
+          <h3>{totalPrice}</h3>
         </div>
       </div>
     </div>

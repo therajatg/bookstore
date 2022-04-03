@@ -25,7 +25,6 @@ export function Products() {
       );
       if (response.status === 201) {
         setCartItems(response.data.cart);
-        console.log(cartItems);
       }
     } catch (error) {
       console.log(error);
@@ -65,14 +64,15 @@ export function Products() {
     <div className={styles.productGrid}>
       {finalProductList.map(
         ({
-          _id,
           img,
           title,
           author,
           rating,
           fastDelivery,
           price,
+          _id,
           categoryName,
+          oldPrice,
         }) => (
           <div className={`card-container ${styles.cardContainer}`} key={_id}>
             {wishlist.find((item) => item._id === _id) ? (
@@ -85,14 +85,15 @@ export function Products() {
                 className={`${styles.position} ${styles.whiteColor} icon-size-small`}
                 onClick={() =>
                   addToWishlist({
-                    _id,
                     img,
                     title,
                     author,
                     rating,
                     fastDelivery,
                     price,
+                    _id,
                     categoryName,
+                    oldPrice,
                   })
                 }
               />
@@ -110,9 +111,10 @@ export function Products() {
             </h4>
             <span className={`margin-one ${styles.flexSpaceBetween}`}>
               <span className={styles.fontPrice}>&#8377;{price}</span>
-              <del className="margin-one gray-text">&#8377;{price + 368}</del>
+              <del className="margin-one gray-text">&#8377;{oldPrice}</del>
               <span className={`${styles.off} font-size-xs`}>
-                {Math.round((368 * 100) / price)}%off
+                {Math.round(((oldPrice - price) * 100) / oldPrice)}
+                %off
               </span>
             </span>
             {cartItems.find((item) => item._id === _id) ? (
@@ -128,13 +130,14 @@ export function Products() {
                 onClick={() => {
                   token
                     ? addToCart({
-                        _id,
                         img,
                         title,
                         author,
                         rating,
                         fastDelivery,
+                        oldPrice,
                         price,
+                        _id,
                         categoryName,
                       })
                     : navigate("/login");

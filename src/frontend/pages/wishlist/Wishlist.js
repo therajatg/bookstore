@@ -73,6 +73,7 @@ function Wishlist() {
           price,
           _id,
           categoryName,
+          oldPrice,
         }) => (
           <div className={`${styles.cardContainer} card-container`}>
             <ImCancelCircle className={styles.position} />
@@ -87,9 +88,9 @@ function Wishlist() {
             </h4>
             <span className={`margin-one ${styles.flexSpaceBetween}`}>
               <span className={styles.fontPrice}>&#8377;{price}</span>
-              <del className="margin-one gray-text">&#8377;{price + 368}</del>
+              <del className="margin-one gray-text">&#8377;{oldPrice}</del>
               <span className={`${styles.off} font-size-xs`}>
-                {Math.round((368 * 100) / price)}%off
+                {Math.round(((oldPrice - price) * 100) / oldPrice)}%off
               </span>
             </span>
             <a
@@ -115,6 +116,7 @@ function Wishlist() {
                       price,
                       _id,
                       categoryName,
+                      oldPrice,
                     });
               }}
             >
