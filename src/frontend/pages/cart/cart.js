@@ -1,21 +1,48 @@
-import { useCart, useAuth } from "../../contexts/index";
-// import { useState } from "react";
+import { useCart, useWishlist, useAuth } from "../../contexts/index";
 import styles from "../../components/products/products.module.css";
 import sty from "./cart.module.css";
 import axios from "axios";
 
 export function Cart() {
   const { setCartItems, cartItems } = useCart();
+  const { setWishlist, wishlist } = useWishlist();
   const { token } = useAuth();
   const encodedToken = localStorage.getItem("token");
 
-  const removeFromCartHandler = async (id) => {
+  const removeFromCart = async (id) => {
     try {
       const response = await axios.delete(`/api/user/cart/${id}`, {
         headers: { authorization: encodedToken },
       });
       setCartItems(response.data.cart);
-      console.log(token);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeFromWishlist = async (id) => {
+    try {
+      const response = await axios.delete(`/api/user/wishlist/${id}`, {
+        headers: { authorization: encodedToken },
+      });
+      setWishlist(response.data.wishlist);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addToWishlist = async (product) => {
+    try {
+      const response = await axios.post(
+        `/api/user/wishlist`,
+        {
+          product,
+        },
+        {
+          headers: { authorization: encodedToken },
+        }
+      );
+      setWishlist(response.data.wishlist);
     } catch (err) {
       console.log(err);
     }
@@ -62,7 +89,17 @@ export function Cart() {
       <div>
         <div className={`${styles.productGrid} ${sty.productGrid}`}>
           {cartItems.map(
-            ({ img, title, author, rating, fastDelivery, price, _id, qty }) => (
+            ({
+              img,
+              title,
+              author,
+              rating,
+              fastDelivery,
+              price,
+              _id,
+              qty,
+              categoryName,
+            }) => (
               <div className={`${styles.cardContainer} card-container`}>
                 <img className={styles.imgDimension} src={img} />
                 <h3 className="margin-zero">{title}</h3>
@@ -102,10 +139,38 @@ export function Cart() {
                 </h2>
                 <div
                   className="button-contained delete-button"
-                  onClick={() => removeFromCartHandler(_id)}
+                  onClick={() => removeFromCart(_id)}
                 >
                   Remove
                 </div>
+
+                {wishlist.find((item) => item._id === _id) ? (
+                  <div
+                    className="button-contained delete-button"
+                    onClick={() => removeFromWishlist(_id)}
+                  >
+                    Remove From Wishlist
+                  </div>
+                ) : (
+                  <div
+                    className="button-contained delete-button"
+                    onClick={() => {
+                      addToWishlist({
+                        img,
+                        title,
+                        author,
+                        rating,
+                        fastDelivery,
+                        price,
+                        _id,
+                        categoryName,
+                      });
+                      removeFromCart(_id);
+                    }}
+                  >
+                    Move To Wishlist
+                  </div>
+                )}
               </div>
             )
           )}
@@ -128,26 +193,4 @@ export function Cart() {
       </div>
     </div>
   );
-}
-
-{
-  /* <h2>
-                  <button
-                    className={`${sty.btn} font-size-m round-corner`}
-                    onClick={(_id, qty) =>
-                      numberOfItemsInCart(_id, qty, "minus")
-                    }
-                  >
-                    -
-                  </button>
-                  <input type="number" value={qty} />
-                  <button
-                    className={`${sty.btn} font-size-m round-corner`}
-                    onClick={(_id, qty) =>
-                      numberOfItemsInCart(_id, qty, "plus")
-                    }
-                  >
-                    +
-                  </button>
-                </h2> */
 }
