@@ -12,7 +12,7 @@ export function Products() {
   const { setCartItems, cartItems } = useCart();
   const { setWishlist, wishlist } = useWishlist();
 
-  const addToCartHandler = async (product) => {
+  const addToCart = async (product) => {
     try {
       const response = await axios.post(
         "/api/user/cart",
@@ -32,7 +32,7 @@ export function Products() {
     }
   };
 
-  const addToWishlistHandler = async (product) => {
+  const addToWishlist = async (product) => {
     try {
       const response = await axios.post(
         "/api/user/wishlist",
@@ -49,7 +49,7 @@ export function Products() {
     }
   };
 
-  const removeFromWishlistHandler = async (id) => {
+  const removeFromWishlist = async (id) => {
     try {
       const response = await axios.delete(`/api/user/wishlist/${id}`, {
         headers: { authorization: token },
@@ -78,13 +78,13 @@ export function Products() {
             {wishlist.find((item) => item._id === _id) ? (
               <AiFillHeart
                 className={`${styles.position} ${styles.redColor} icon-size-small`}
-                onClick={() => removeFromWishlistHandler(_id)}
+                onClick={() => removeFromWishlist(_id)}
               />
             ) : (
               <AiFillHeart
                 className={`${styles.position} ${styles.whiteColor} icon-size-small`}
                 onClick={() =>
-                  addToWishlistHandler({
+                  addToWishlist({
                     _id,
                     img,
                     title,
@@ -127,7 +127,7 @@ export function Products() {
                 className="button-contained add-to-cart-button margin-one font-size-s"
                 onClick={() => {
                   token
-                    ? addToCartHandler({
+                    ? addToCart({
                         _id,
                         img,
                         title,
