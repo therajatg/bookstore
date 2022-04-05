@@ -9,15 +9,20 @@ function Navbar() {
   const { cartItems } = useCart();
   const { wishlist } = useWishlist();
   const { authState, authDispatch } = useAuth();
-  const { token } = authState;
+  const { user, token } = authState;
   const navigate = useNavigate();
 
-  function loginHandler(e) {
+  function logoutHandler(e) {
     e.preventDefault();
     localStorage.removeItem("token");
     authDispatch({ type: "TOKEN", payload: null });
     navigate("/");
   }
+
+  function loginHandler(e) {
+    navigate("/login");
+  }
+
   return (
     <nav className="navigation-container">
       <div className="logo" onClick={() => navigate("/")}>
@@ -35,13 +40,22 @@ function Navbar() {
       </div>
       <div className="nav-options">
         <div className="helloUser">
-          <span>Hello User</span>
-          <button
-            className="button-outlined font-size-s"
-            onClick={loginHandler}
-          >
-            {token ? "Logout" : "Login"}
-          </button>
+          <span>{token ? `Hi, ${user.firstName}` : "Welcome"}</span>
+          {token ? (
+            <button
+              className="button-outlined font-size-s"
+              onClick={logoutHandler}
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              className="button-outlined font-size-s"
+              onClick={loginHandler}
+            >
+              Login
+            </button>
+          )}
         </div>
         <Link to={token ? "/wishlist" : "/login"}>
           <div className="icon-button">

@@ -12,7 +12,7 @@ export function Products() {
   const { setCartItems, cartItems } = useCart();
   const { setWishlist, wishlist } = useWishlist();
 
-  const addToCartHandler = async (product) => {
+  const addToCart = async (product) => {
     try {
       const response = await axios.post(
         "/api/user/cart",
@@ -25,14 +25,13 @@ export function Products() {
       );
       if (response.status === 201) {
         setCartItems(response.data.cart);
-        console.log(cartItems);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const addToWishlistHandler = async (product) => {
+  const addToWishlist = async (product) => {
     try {
       const response = await axios.post(
         "/api/user/wishlist",
@@ -49,7 +48,7 @@ export function Products() {
     }
   };
 
-  const removeFromWishlistHandler = async (id) => {
+  const removeFromWishlist = async (id) => {
     try {
       const response = await axios.delete(`/api/user/wishlist/${id}`, {
         headers: { authorization: token },
@@ -65,34 +64,36 @@ export function Products() {
     <div className={styles.productGrid}>
       {finalProductList.map(
         ({
-          _id,
           img,
           title,
           author,
           rating,
           fastDelivery,
           price,
+          _id,
           categoryName,
+          oldPrice,
         }) => (
           <div className={`card-container ${styles.cardContainer}`} key={_id}>
             {wishlist.find((item) => item._id === _id) ? (
               <AiFillHeart
                 className={`${styles.position} ${styles.redColor} icon-size-small`}
-                onClick={() => removeFromWishlistHandler(_id)}
+                onClick={() => removeFromWishlist(_id)}
               />
             ) : (
               <AiFillHeart
                 className={`${styles.position} ${styles.whiteColor} icon-size-small`}
                 onClick={() =>
-                  addToWishlistHandler({
-                    _id,
+                  addToWishlist({
                     img,
                     title,
                     author,
                     rating,
                     fastDelivery,
                     price,
+                    _id,
                     categoryName,
+                    oldPrice,
                   })
                 }
               />
@@ -110,9 +111,10 @@ export function Products() {
             </h4>
             <span className={`margin-one ${styles.flexSpaceBetween}`}>
               <span className={styles.fontPrice}>&#8377;{price}</span>
-              <del className="margin-one gray-text">&#8377;{price + 368}</del>
+              <del className="margin-one gray-text">&#8377;{oldPrice}</del>
               <span className={`${styles.off} font-size-xs`}>
-                {Math.round((368 * 100) / price)}%off
+                {Math.round(((oldPrice - price) * 100) / oldPrice)}
+                %off
               </span>
             </span>
             {cartItems.find((item) => item._id === _id) ? (
@@ -127,14 +129,15 @@ export function Products() {
                 className="button-contained add-to-cart-button margin-one font-size-s"
                 onClick={() => {
                   token
-                    ? addToCartHandler({
-                        _id,
+                    ? addToCart({
                         img,
                         title,
                         author,
                         rating,
                         fastDelivery,
+                        oldPrice,
                         price,
+                        _id,
                         categoryName,
                       })
                     : navigate("/login");
