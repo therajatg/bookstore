@@ -7,8 +7,8 @@
   font-family: var(--general-font);
   position: relative;
   width: 100%;
-  /* margin-bottom: 0; */
   z-index: 1;
+  margin-top: 5%;
 }
 
 .footer-header {

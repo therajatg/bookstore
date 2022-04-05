@@ -21,12 +21,11 @@ function Login() {
         type: "TOKEN",
         payload: response.data.encodedToken,
       });
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       authDispatch({
         type: "ERROR",
-        payload:
-          "Wrong Email or Pssword, signup if you don't have account with us",
+        payload: "Wrong Email or Password",
       });
       console.log(err);
     }
@@ -38,10 +37,10 @@ function Login() {
         type: "ERROR",
         payload: null,
       });
-  }, 3000);
+  }, 5000);
 
   return (
-    <div className="center">
+    <div className="center weightedText paddingTop">
       <form
         className="input-container ecom-placing-input-container"
         onSubmit={loginHandler}
@@ -80,9 +79,10 @@ function Login() {
           className="btn-no-border-no-color ecom-center-inside-flex"
         >
           <h2>Log In</h2>
+          <div className="errorText">{error}</div>
         </button>
         <Link to="/signup" className="ecom-center-inside-flex">
-          Create Account
+          Create an account
         </Link>
       </form>
     </div>

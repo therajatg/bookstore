@@ -1,31 +1,3 @@
-.productGrid {
-  padding-left: 0;
-  padding-right: 30%;
-}
-
-.priceDetails {
-  display: flex;
-  justify-content: space-between;
-  width: 25%;
-  height: 60%;
-  box-shadow: var(--default-box-shadow);
-  top: 7rem;
-  right: 2rem;
-  position: fixed;
-  box-shadow: var(--default-box-shadow);
-  border-radius: 2rem;
-}
-
-.cartAndPriceDetails {
-  padding-top: 7rem;
-}
-
-.btn {
-  height: 2rem;
-  width: 2rem;
-  margin-right: 0.5rem;
-}
-
-.round {
-  border-radius: 999rem;
+.emptyCart {
+  text-align: center;
 }

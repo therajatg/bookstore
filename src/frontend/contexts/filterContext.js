@@ -25,7 +25,6 @@ function FilterProvider({ children }) {
     sortByPrice: false,
     fastDelivery: false,
     reset: false,
-    seeMore: false,
   });
 
   useEffect(() => {

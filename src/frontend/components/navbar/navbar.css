@@ -1,4 +1,4 @@
-.icon-size-large {
+.iconSizeLarge {
   height: 2.5rem;
   width: 2.5rem;
 }
@@ -7,7 +7,7 @@ img {
   position: relative;
 }
 
-.icon-size-small {
+.iconSizeSmall {
   height: 1.8rem;
   width: 1.8rem;
 }
@@ -16,10 +16,18 @@ img {
   font-weight: 1000;
 }
 
+.icon-button__badge {
+  background: var(--primary-color);
+}
+
 .logo {
   cursor: pointer;
   font-family: var(--stylish-font);
   color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .navigation-container {
@@ -27,16 +35,4 @@ img {
   width: 100%;
   position: fixed;
   z-index: 2;
-}
-
-.logo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.helloUser {
-  display: flex;
-  flex-direction: column;
 }
