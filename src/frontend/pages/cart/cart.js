@@ -2,7 +2,7 @@ import { CartProducts, CartPriceCard } from "../../components/index";
 import styles from "./cart.module.css";
 import { useCart } from "../../contexts/index";
 
-export function Cart() {
+function Cart() {
   const { cartItems } = useCart();
   return (
     <div className="paddingTop">
@@ -20,3 +20,5 @@ export function Cart() {
     </div>
   );
 }
+
+export { Cart };
