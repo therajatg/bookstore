@@ -1,6 +1,10 @@
 import styles from "./products.module.css";
 import { useFilter, useAuth, useCart, useWishlist } from "../../contexts/index";
-import axios from "axios";
+import {
+  addToWishlist,
+  removeFromWishlist,
+  addToCart,
+} from "../../helperFunctions/index";
 import { useNavigate } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
 
@@ -11,54 +15,6 @@ export function Products() {
   const { token } = authState;
   const { setCartItems, cartItems } = useCart();
   const { setWishlist, wishlist } = useWishlist();
-
-  const addToCart = async (product) => {
-    try {
-      const response = await axios.post(
-        "/api/user/cart",
-        {
-          product,
-        },
-        {
-          headers: { authorization: token },
-        }
-      );
-      if (response.status === 201) {
-        setCartItems(response.data.cart);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const addToWishlist = async (product) => {
-    try {
-      const response = await axios.post(
-        "/api/user/wishlist",
-        {
-          product,
-        },
-        {
-          headers: { authorization: token },
-        }
-      );
-      setWishlist(response.data.wishlist);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const removeFromWishlist = async (id) => {
-    try {
-      const response = await axios.delete(`/api/user/wishlist/${id}`, {
-        headers: { authorization: token },
-      });
-
-      setWishlist(response.data.wishlist);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div className={styles.productGrid}>
@@ -77,31 +33,41 @@ export function Products() {
           <div className={`card-container ${styles.cardContainer}`} key={_id}>
             {wishlist.find((item) => item._id === _id) ? (
               <AiFillHeart
-                className={`${styles.position} ${styles.redColor} icon-size-small`}
-                onClick={() => removeFromWishlist(_id)}
+                className={`heart-position ${styles.redColor} iconSizeSmall heart-hover`}
+                onClick={() =>
+                  token
+                    ? removeFromWishlist(_id, setWishlist, token)
+                    : navigate("/login")
+                }
               />
             ) : (
               <AiFillHeart
-                className={`${styles.position} ${styles.whiteColor} icon-size-small`}
+                className={`heart-position ${styles.whiteColor} iconSizeSmall heart-hover`}
                 onClick={() =>
-                  addToWishlist({
-                    img,
-                    title,
-                    author,
-                    rating,
-                    fastDelivery,
-                    price,
-                    _id,
-                    categoryName,
-                    oldPrice,
-                  })
+                  token
+                    ? addToWishlist(
+                        {
+                          img,
+                          title,
+                          author,
+                          rating,
+                          fastDelivery,
+                          price,
+                          _id,
+                          categoryName,
+                          oldPrice,
+                        },
+                        setWishlist,
+                        token
+                      )
+                    : navigate("/login")
                 }
               />
             )}
 
             <img className={styles.imgDimension} src={img} />
 
-            <h3 className="margin-zero">{title}</h3>
+            <h3 className="margin-one">{title}</h3>
             <h6 className="margin-one">by {author}</h6>
             <p className={`${styles.rating} margin-one`}>Rating: {rating}</p>
             <h4 className="margin-one">
@@ -119,27 +85,31 @@ export function Products() {
             </span>
             {cartItems.find((item) => item._id === _id) ? (
               <button
-                className="button-contained add-to-cart-button margin-one font-size-s"
+                className="button-contained add-to-cart-button margin-one font-size-s btn-no-border-no-color"
                 onClick={() => navigate("/cart")}
               >
                 Go To Cart
               </button>
             ) : (
               <button
-                className="button-contained add-to-cart-button margin-one font-size-s"
+                className="button-contained add-to-cart-button margin-one font-size-s btn-no-border-no-color"
                 onClick={() => {
                   token
-                    ? addToCart({
-                        img,
-                        title,
-                        author,
-                        rating,
-                        fastDelivery,
-                        oldPrice,
-                        price,
-                        _id,
-                        categoryName,
-                      })
+                    ? addToCart(
+                        {
+                          img,
+                          title,
+                          author,
+                          rating,
+                          fastDelivery,
+                          oldPrice,
+                          price,
+                          _id,
+                          categoryName,
+                        },
+                        setCartItems,
+                        token
+                      )
                     : navigate("/login");
                 }}
               >

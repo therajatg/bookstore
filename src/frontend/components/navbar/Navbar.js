@@ -26,7 +26,7 @@ function Navbar() {
   return (
     <nav className="navigation-container">
       <div className="logo" onClick={() => navigate("/")}>
-        <FaBookOpen className="icon-size-small" />
+        <FaBookOpen className="iconSizeSmall" />
         <span className="font-size-m">Kitab</span>
       </div>
 
@@ -39,27 +39,25 @@ function Navbar() {
         <FcSearch />
       </div>
       <div className="nav-options">
-        <div className="helloUser">
-          <span>{token ? `Hi, ${user.firstName}` : "Welcome"}</span>
-          {token ? (
-            <button
-              className="button-outlined font-size-s"
-              onClick={logoutHandler}
-            >
-              Logout
-            </button>
-          ) : (
-            <button
-              className="button-outlined font-size-s"
-              onClick={loginHandler}
-            >
-              Login
-            </button>
-          )}
-        </div>
+        {token ? (
+          <button
+            className="button-outlined font-size-s"
+            onClick={logoutHandler}
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            className="button-outlined font-size-s"
+            onClick={loginHandler}
+          >
+            Login
+          </button>
+        )}
+
         <Link to={token ? "/wishlist" : "/login"}>
           <div className="icon-button">
-            <AiFillHeart className="icon-size-large" />
+            <AiFillHeart className="iconSizeLarge" />
             <span className="icon-button__badge">
               {token ? wishlist.length : 0}
             </span>
@@ -67,7 +65,7 @@ function Navbar() {
         </Link>
         <Link to={token ? "/cart" : "/login"}>
           <div className="icon-button">
-            <FaShoppingCart className="icon-size-large" />
+            <FaShoppingCart className="iconSizeLarge" />
             <span className="icon-button__badge">
               {token ? cartItems.length : 0}
             </span>

@@ -1,5 +1,5 @@
 import "./App.css";
-import { Navbar, Footer } from "./frontend/components/index";
+import { Navbar } from "./frontend/components/index";
 import { Router } from "./Router";
 
 function App() {
@@ -7,7 +7,6 @@ function App() {
     <div className="App">
       <Navbar />
       <Router />
-      <Footer />
     </div>
   );
 }

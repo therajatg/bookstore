@@ -23,26 +23,18 @@ function Signup() {
         type: "TOKEN",
         payload: response.data.encodedToken,
       });
-      navigate("/login");
+      navigate("/home");
     } catch (err) {
       authDispatch({
         type: "ERROR",
-        payload: "Some error occurred, while trying to signup",
+        payload: "Something went wrong",
       });
       console.log(err);
     }
   };
 
-  setTimeout(() => {
-    if (error)
-      authDispatch({
-        type: "ERROR",
-        payload: null,
-      });
-  }, 3000);
-
   return (
-    <div className="center">
+    <div className="center weightedText paddingTop">
       <form
         className="input-container ecom-placing-input-container"
         onSubmit={formSignupHandler}

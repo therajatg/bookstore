@@ -1,0 +1,78 @@
+.allProductsContainer {
+  display: grid;
+  margin: 0 3rem 0 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  column-gap: 2rem;
+  row-gap: 4rem;
+  color: var(--text-and-background-color);
+  padding-top: 7rem;
+}
+
+.cardContainer {
+  display: flex;
+  align-items: center;
+  column-gap: 3rem;
+  box-shadow: var(--default-box-shadow);
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 1rem;
+}
+.cancelIcon {
+  float: right;
+}
+
+.textContainer {
+  align-self: flex-start;
+}
+
+.imgDimension {
+  height: 12rem;
+  object-fit: contain;
+}
+
+.rating {
+  background-color: var(--primary-color-light);
+  color: var(--secondary-color);
+  background-color: var(--rating-color);
+  padding: 2px 4px;
+  border-radius: 1rem;
+  font-weight: 600;
+  width: 40%;
+}
+
+.flexSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+}
+
+.fontPrice {
+  font-weight: 900;
+  font-size: larger;
+}
+
+.off {
+  color: var(--primary-color);
+}
+
+.cartAndPriceDetails {
+  padding-top: 7rem;
+}
+
+.btn {
+  height: 2rem;
+  width: 2rem;
+}
+
+.button {
+  background-color: var(--secondary-color);
+  font-weight: 600;
+  color: var(--text-and-background-color);
+  text-align: center;
+  padding: 0.4rem;
+  border-radius: 0.8rem;
+}
+
+.button:hover {
+  cursor: pointer;
+}

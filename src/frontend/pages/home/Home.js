@@ -1,11 +1,12 @@
 import "./home.css";
-import { Products, Filter } from "../../components/index";
+import { Products, Filter, Footer } from "../../components/index";
 
 function Home() {
   return (
-    <div className="sidebar-and-products">
+    <div className="filterProductAndFooter">
       <Filter />
       <Products />
+      <Footer />
     </div>
   );
 }

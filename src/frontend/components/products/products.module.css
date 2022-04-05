@@ -4,16 +4,12 @@
   grid-row-gap: 7rem;
   grid-column-gap: 7rem;
   color: var(--text-and-background-color);
-  padding-left: 30%;
+  padding-left: 25%;
+  padding-right: 5%;
 }
 
 .imgDimension {
   height: 60%;
-}
-
-.position {
-  position: absolute;
-  z-index: 1;
 }
 
 .redColor {
@@ -21,7 +17,7 @@
 }
 
 .whiteColor {
-  color: white;
+  color: var(--secondary-color);
 }
 
 .cardContainer {
@@ -38,6 +34,7 @@
 .rating {
   background-color: var(--primary-color-light);
   color: var(--secondary-color);
+  background-color: var(--rating-color);
   padding: 2px 4px;
   border-radius: 1rem;
   font-weight: 600;

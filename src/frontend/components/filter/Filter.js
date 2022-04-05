@@ -1,5 +1,6 @@
 import "./filter.css";
 import { useFilter } from "../../contexts/index";
+import { allCategories } from "../../constants/categories";
 
 export function Filter() {
   const { filterDispatch, filterState } = useFilter();
@@ -33,128 +34,13 @@ export function Filter() {
       <div>
         <h2>Category</h2>
         <ul>
-          <li>
-            <input
-              type="checkbox"
-              id="biographies"
-              value="BIOGRAPHIES"
-              checked={categories.includes("BIOGRAPHIES")}
-              onChange={(e) =>
-                filterDispatch({ type: "CATEGORIES", payload: e.target.value })
-              }
-            />
-            <label htmlFor="biographies">Biographies</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="literature"
-              value="LITERATURE_AND_FICTION"
-              checked={categories.includes("LITERATURE_AND_FICTION")}
-              onChange={(e) =>
-                filterDispatch({ type: "CATEGORIES", payload: e.target.value })
-              }
-            />
-            <label htmlFor="literature">Literature & Fiction</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="business"
-              value="BUSINESS_AND_MONEY"
-              checked={categories.includes("BUSINESS_AND_MONEY")}
-              onChange={(e) =>
-                filterDispatch({ type: "CATEGORIES", payload: e.target.value })
-              }
-            />
-            <label htmlFor="business">Business & Money</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="comics"
-              value="COMICS_AND_GRAPHIC_NOVELS"
-              checked={categories.includes("COMICS_AND_GRAPHIC_NOVELS")}
-              onChange={(e) =>
-                filterDispatch({ type: "CATEGORIES", payload: e.target.value })
-              }
-            />
-            <label htmlFor="comics">Comics & Graphic novels</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="computers"
-              value="COMPUTERS_AND_TECHNOLOGY"
-              checked={categories.includes("COMPUTERS_AND_TECHNOLOGY")}
-              onChange={(e) =>
-                filterDispatch({ type: "CATEGORIES", payload: e.target.value })
-              }
-            />
-            <label htmlFor="computers">Computers & Technology</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="parenting"
-              value="PARENTING_AND_RELATIONSHIPS"
-              checked={categories.includes("PARENTING_AND_RELATIONSHIPS")}
-              onChange={(e) =>
-                filterDispatch({ type: "CATEGORIES", payload: e.target.value })
-              }
-            />
-            <label htmlFor="parenting">Parenting & Relationships</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="cookbook"
-              value="COOKBOOKS_FOOD_AND_WINE"
-              checked={categories.includes("COOKBOOKS_FOOD_AND_WINE")}
-              onChange={(e) =>
-                filterDispatch({ type: "CATEGORIES", payload: e.target.value })
-              }
-            />
-            <label htmlFor="cookbook">Cookbooks, Food & Wine</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="education"
-              value="EDUCATION_AND_TEACHING"
-              checked={categories.includes("EDUCATION_AND_TEACHING")}
-              onChange={(e) =>
-                filterDispatch({ type: "CATEGORIES", payload: e.target.value })
-              }
-            />
-            <label htmlFor="education">Education & Teaching</label>
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              id="politics"
-              value="POLICTICS_AND_SOCIAL_SCIENCES"
-              checked={categories.includes("POLICTICS_AND_SOCIAL_SCIENCES")}
-              onChange={(e) =>
-                filterDispatch({ type: "CATEGORIES", payload: e.target.value })
-              }
-            />
-            <label htmlFor="politics">Politics & Social Sciences</label>
-          </li>
-          <li
-            className="see-more"
-            onClick={() => filterDispatch({ type: "SEE_MORE" })}
-            style={{ display: seeMore ? "none" : "block" }}
-          >
-            See More
-          </li>
-          <div style={{ display: seeMore ? "block" : "none" }}>
+          {allCategories.map((item) => (
             <li>
               <input
                 type="checkbox"
-                id="business"
-                value="BUSINESS_AND_MONEY"
-                checked={categories.includes("BUSINESS_AND_MONEY")}
+                id={item}
+                value={item}
+                checked={categories.includes(item)}
                 onChange={(e) =>
                   filterDispatch({
                     type: "CATEGORIES",
@@ -162,84 +48,9 @@ export function Filter() {
                   })
                 }
               />
-              <label htmlFor="business">Business & Money</label>
+              <label htmlFor={item}>{item}</label>
             </li>
-            <li>
-              <input
-                type="checkbox"
-                id="comics"
-                value="COMICS_AND_GRAPHIC_NOVELS"
-                checked={categories.includes("COMICS_AND_GRAPHIC_NOVELS")}
-                onChange={(e) =>
-                  filterDispatch({
-                    type: "CATEGORIES",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <label htmlFor="comics">Comics & Graphic novels</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="computers"
-                value="COMPUTERS_AND_TECHNOLOGY"
-                checked={categories.includes("COMPUTERS_AND_TECHNOLOGY")}
-                onChange={(e) =>
-                  filterDispatch({
-                    type: "CATEGORIES",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <label htmlFor="computers">Computers & Technology</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="parenting"
-                value="PARENTING_AND_RELATIONSHIPS"
-                checked={categories.includes("PARENTING_AND_RELATIONSHIPS")}
-                onChange={(e) =>
-                  filterDispatch({
-                    type: "CATEGORIES",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <label htmlFor="parenting">Parenting & Relationships</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="cookbook"
-                value="COOKBOOKS_FOOD_AND_WINE"
-                checked={categories.includes("COOKBOOKS_FOOD_AND_WINE")}
-                onChange={(e) =>
-                  filterDispatch({
-                    type: "CATEGORIES",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <label htmlFor="cookbook">Cookbooks, Food & Wine</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="education"
-                value="EDUCATION_AND_TEACHING"
-                checked={categories.includes("EDUCATION_AND_TEACHING")}
-                onChange={(e) =>
-                  filterDispatch({
-                    type: "CATEGORIES",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <label htmlFor="education">Education & Teaching</label>
-            </li>
-          </div>
+          ))}
         </ul>
       </div>
 
