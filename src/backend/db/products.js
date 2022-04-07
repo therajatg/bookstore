@@ -17,17 +17,6 @@ export const products = [
 
   {
     _id: uuid(),
-    img: `${link}/new releases/1_vc4ey1.jpg`,
-    title: "The Maid: A gripping read",
-    author: "Nita Prose ",
-    rating: 4.0,
-    fastDelivery: true,
-    oldPrice: 820,
-    price: 650,
-    categoryName: "New Releases",
-  },
-  {
-    _id: uuid(),
     img: `${link}/literature and fiction/1_maqnxo.jpg`,
     title: "The Book of Longings: A Novel",
     author: "Sue Monk Kidd",
@@ -139,17 +128,7 @@ export const products = [
     price: 1000,
     categoryName: "Literature & Fiction",
   },
-  {
-    _id: uuid(),
-    img: "http://res.cloudinary.com/therajatg/image/upload/books/parenting and relationships/5_snu3lh.jpg",
-    title: "Walking on Eggshells: Navigating the Relationship",
-    author: "Jane Isay",
-    rating: 4.5,
-    fastDelivery: false,
-    oldPrice: 824,
-    price: 560,
-    categoryName: "Parenting & Relationships",
-  },
+
   {
     _id: uuid(),
     img: "http://res.cloudinary.com/therajatg/image/upload/books/new releases/4_tklydl.jpg",
@@ -162,29 +141,6 @@ export const products = [
     categoryName: "New Releases",
   },
 
-  {
-    _id: uuid(),
-    img: "http://res.cloudinary.com/therajatg/image/upload/books/biographies/2_u0tefs.jpg",
-    title: "Indra Nooyi - A Biography",
-    author: "Annapoorna",
-    rating: 3.0,
-    fastDelivery: true,
-    oldPrice: 565,
-    price: 240,
-    categoryName: "Biographies",
-  },
-
-  {
-    _id: uuid(),
-    img: "http://res.cloudinary.com/therajatg/image/upload/books/literature and fiction/7_odibmh.jpg",
-    title: "The Memory of an Elephant",
-    author: "Alex Lasker",
-    rating: 4.5,
-    fastDelivery: true,
-    oldPrice: 1450,
-    price: 1000,
-    categoryName: "Literature & Fiction",
-  },
   {
     _id: uuid(),
     img: "http://res.cloudinary.com/therajatg/image/upload/books/parenting and relationships/2_ndqmlk.jpg",
