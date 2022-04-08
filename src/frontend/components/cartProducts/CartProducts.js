@@ -29,7 +29,11 @@ function CartProducts() {
           categoryName,
         }) => (
           <div className={styles.cardContainer}>
-            <img className={styles.imgDimension} src={img} />
+            <img
+              className={styles.imgDimension}
+              src={img}
+              alt="product-image"
+            />
             <div>
               <h3 className="margin-zero">{title}</h3>
               <h6 className="margin-one">by {author}</h6>

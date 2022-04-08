@@ -65,7 +65,11 @@ export function Products() {
               />
             )}
 
-            <img className={styles.imgDimension} src={img} />
+            <img
+              className={styles.imgDimension}
+              src={img}
+              alt="product-image"
+            />
 
             <h3 className="margin-one">{title}</h3>
             <h6 className="margin-one">by {author}</h6>

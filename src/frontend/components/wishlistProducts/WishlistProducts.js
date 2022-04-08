@@ -27,7 +27,11 @@ function WishlistProducts() {
           oldPrice,
         }) => (
           <div className={styles.cardContainer}>
-            <img className={styles.imgDimension} src={img} />
+            <img
+              className={styles.imgDimension}
+              src={img}
+              alt="product-image"
+            />
 
             <div className={styles.textContainer}>
               <ImCancelCircle
