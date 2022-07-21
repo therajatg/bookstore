@@ -5,6 +5,7 @@ import {
   Wishlist,
   Login,
   Signup,
+  PageNotFound,
 } from "./frontend/pages/index";
 import Mockman from "mockman-js";
 import { Route, Routes } from "react-router-dom";
@@ -13,6 +14,7 @@ function Router() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+      <Route path="*" element={<PageNotFound />} />
       <Route path="/home" element={<Home />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/wishlist" element={<Wishlist />} />
