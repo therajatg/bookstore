@@ -39,7 +39,8 @@ function filterReducer(state, action) {
 }
 
 function rangeFilter(productListing, state) {
-  return productListing.filter((item) =>
+  console.log(productListing);
+  return productListing?.filter((item) =>
     item.price <= state.range ? true : false
   );
 }

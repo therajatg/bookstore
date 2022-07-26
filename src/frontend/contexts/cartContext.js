@@ -2,7 +2,6 @@ import axios from "axios";
 import { createContext, useContext, useState, useEffect } from "react";
 import { useAuth } from "./index";
 
-// const encodedToken = localStorage.getItem("token");
 const cartContext = createContext();
 const useCart = () => useContext(cartContext);
 

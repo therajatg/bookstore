@@ -55,7 +55,7 @@ function Navbar() {
           </button>
         )}
 
-        <Link to={token ? "/wishlist" : "/login"}>
+        <Link to="/wishlist">
           <div className="icon-button">
             <AiFillHeart className="iconSizeLarge" />
             <span className="icon-button__badge">
@@ -63,7 +63,7 @@ function Navbar() {
             </span>
           </div>
         </Link>
-        <Link to={token ? "/cart" : "/login"}>
+        <Link to="/cart">
           <div className="icon-button">
             <FaShoppingCart className="iconSizeLarge" />
             <span className="icon-button__badge">
