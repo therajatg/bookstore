@@ -1,12 +1,13 @@
 import { useAuth } from "../../contexts/index";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./signup.css";
+import { toast } from "react-toastify";
 
 function Signup() {
   const { authState, authDispatch } = useAuth();
   const { user, error } = authState;
-
+  const location = useLocation();
   const navigate = useNavigate();
 
   const formSignupHandler = async (e) => {
@@ -23,13 +24,15 @@ function Signup() {
         type: "TOKEN",
         payload: response.data.encodedToken,
       });
-      navigate("/home");
+      toast.success("Signup Successful");
+      let from = location.state?.from?.pathname || "/home";
+      navigate(from, { replace: true });
     } catch (err) {
       authDispatch({
         type: "ERROR",
         payload: "Something went wrong",
       });
-      console.log(err);
+      toast.error("Error occurred, please try again");
     }
   };
 
@@ -130,5 +133,3 @@ function Signup() {
 }
 
 export { Signup };
-
-// If I use the input tag instead of button tag for create then form disappears.

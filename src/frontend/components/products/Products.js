@@ -5,11 +5,12 @@ import {
   removeFromWishlist,
   addToCart,
 } from "../../helperFunctions/index";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
 
 export function Products() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { finalProductList } = useFilter();
   const { authState } = useAuth();
   const { token } = authState;
@@ -37,7 +38,7 @@ export function Products() {
                 onClick={() =>
                   token
                     ? removeFromWishlist(_id, setWishlist, token)
-                    : navigate("/login")
+                    : navigate("/login", { state: { from: location } })
                 }
               />
             ) : (
@@ -60,7 +61,7 @@ export function Products() {
                         setWishlist,
                         token
                       )
-                    : navigate("/login")
+                    : navigate("/login", { state: { from: location } })
                 }
               />
             )}
@@ -114,7 +115,7 @@ export function Products() {
                         setCartItems,
                         token
                       )
-                    : navigate("/login");
+                    : navigate("/login", { state: { from: location } });
                 }}
               >
                 Add To Cart

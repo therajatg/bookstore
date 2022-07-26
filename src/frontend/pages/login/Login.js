@@ -23,7 +23,7 @@ export function Login() {
         payload: response.data.encodedToken,
       });
       toast.success("Login Successful");
-      let from = location.state?.from?.pathname || "/";
+      let from = location.state?.from?.pathname || "/home";
       navigate(from, { replace: true });
     } catch (err) {
       authDispatch({
