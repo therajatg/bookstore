@@ -1,11 +1,12 @@
 import { useAuth } from "../../contexts/authContext";
-import "../signup/signup.css";
-import "./login.css";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import style from "./login.module.css";
+import { toast } from "react-toastify";
 
-function Login() {
+export function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { authState, authDispatch } = useAuth();
   const { user, error } = authState;
 
@@ -21,74 +22,63 @@ function Login() {
         type: "TOKEN",
         payload: response.data.encodedToken,
       });
-      navigate("/home");
+      toast.success("Login Successful");
+      let from = location.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
     } catch (err) {
       authDispatch({
         type: "ERROR",
         payload: "Wrong Email or Password",
       });
       console.log(err);
+      toast.error("Error occurred, please try again");
     }
   };
 
-  setTimeout(() => {
-    if (error)
-      authDispatch({
-        type: "ERROR",
-        payload: null,
-      });
-  }, 5000);
-
   return (
-    <div className="center weightedText paddingTop">
-      <form
-        className="input-container ecom-placing-input-container"
-        onSubmit={loginHandler}
-      >
-        <h1 className="ecom-center-inside-flex">Login</h1>
-        <div className="input-name">
-          <label htmlFor="email">EMAIL:</label>
+    <div className={style.loginPage}>
+      <form className={style.form} onSubmit={loginHandler}>
+        <p className={style.title}>Login to Kitab</p>
+        <div>
+          <label htmlFor="email">EMAIL</label>
           <input
             type="email"
             id="email"
-            className="name-input-field"
-            required
+            name="email"
             onChange={(e) =>
               authDispatch({ type: "EMAIL", payload: e.target.value })
             }
           />
         </div>
-        <div className="input-password">
-          <label htmlFor="password">PASSWORD:</label>
+        <div>
+          <label htmlFor="password">PASSWORD</label>
           <input
             type="password"
             id="password"
-            className="password-input-field"
-            required
+            name="password"
             onChange={(e) =>
-              authDispatch({
-                type: "PASSWORD",
-                payload: e.target.value,
-              })
+              authDispatch({ type: "PASSWORD", payload: e.target.value })
             }
           />
-          <span className="ecom-forgot-password">Forgot Password?</span>
         </div>
+        <button className={style.loginBtn}>LOGIN</button>
         <button
-          type="submit"
-          className="btn-no-border-no-color ecom-center-inside-flex"
+          className={style.guestLoginBtn}
+          onClick={() => {
+            authDispatch({ type: "PASSWORD", payload: "rajatgupta" });
+            authDispatch({ type: "EMAIL", payload: "rajat@gmail.com" });
+          }}
         >
-          <h2>Log In</h2>
-          <div className="errorText">{error}</div>
+          Login As Guest
         </button>
-        <Link to="/signup" className="ecom-center-inside-flex">
-          Create an account
-        </Link>
+
+        <p className={style.signupLine}>
+          Need An Account?{" "}
+          <Link to="/signup" className={style.signup}>
+            Signup
+          </Link>{" "}
+        </p>
       </form>
     </div>
   );
 }
-
-export { Login };
-
-// As soon as I write input in place of button all goes away
