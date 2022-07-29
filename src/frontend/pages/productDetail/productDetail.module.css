@@ -1,0 +1,11 @@
+.main {
+  width: 60rem;
+  display: flex;
+  column-gap: 3rem;
+  margin: auto;
+}
+
+.text {
+  color: black;
+  min-height: 50rem;
+}

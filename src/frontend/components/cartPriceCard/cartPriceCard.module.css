@@ -14,3 +14,7 @@
 .green {
   color: var(--rating-color);
 }
+
+.address {
+  color: black;
+}

@@ -1,7 +1,10 @@
 export { Filter } from "./filter/Filter";
 export { Navbar } from "./navbar/Navbar";
-export { Products } from "./products/Products";
+export { ProductCard } from "./productCard/ProductCard";
 export { Footer } from "./footer/Footer";
 export { CartProducts } from "./cartProducts/CartProducts";
 export { CartPriceCard } from "./cartPriceCard/CartPriceCard";
 export { WishlistProducts } from "./wishlistProducts/WishlistProducts";
+export { Address } from "./address/Address";
+export { BasicInfo } from "./basicInfo/BasicInfo";
+export { AddressModal } from "./addressModal/AddressModal";

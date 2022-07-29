@@ -1,0 +1,54 @@
+.wrapper {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.infoDiv {
+  position: absolute;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-weight: 700;
+  min-width: 50rem;
+  padding: 1rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  border-radius: 1rem;
+}
+
+.horizontalInputs {
+  display: flex;
+  column-gap: 2rem;
+}
+
+.input {
+  border-radius: 5px;
+  border: 2px solid black;
+  width: 25rem;
+  height: 1.5rem;
+}
+
+.cancelBtn {
+  color: black;
+  background-color: #dcdcdc;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+}
+
+.submitAddress {
+  color: white;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+}

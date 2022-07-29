@@ -6,7 +6,11 @@ import {
   Login,
   Signup,
   PageNotFound,
+  ProductDetail,
+  Profile,
+  DeliveryAddress,
 } from "../pages/index";
+import { BasicInfo, Address } from "../components/index";
 import { RequiresAuth } from "./RequiresAuth";
 import Mockman from "mockman-js";
 import { Route, Routes } from "react-router-dom";
@@ -33,9 +37,21 @@ function Router() {
           </RequiresAuth>
         }
       />
+      <Route
+        path="/profile"
+        element={
+          <RequiresAuth>
+            <Profile />
+          </RequiresAuth>
+        }
+      >
+        <Route path="/profile" element={<BasicInfo />} />
+        <Route path="/profile/address" element={<Address />} />
+      </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      {/* <Route path="/product/:id" element={<ProductDetail />} /> */}
+      <Route path="/deliveryAddress" element={<DeliveryAddress />} />
+      <Route path="/productDetail/:productId" element={<ProductDetail />} />
       <Route path="/test-api" element={<Mockman />} />
     </Routes>
   );

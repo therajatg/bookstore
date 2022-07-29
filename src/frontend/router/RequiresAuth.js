@@ -5,7 +5,6 @@ export function RequiresAuth({ children }) {
   const {
     authState: { token },
   } = useAuth();
-  console.log(token);
   const location = useLocation();
   return token ? (
     children

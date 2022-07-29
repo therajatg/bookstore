@@ -3,34 +3,35 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./signup.css";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 function Signup() {
   const { authState, authDispatch } = useAuth();
   const { user, error } = authState;
   const location = useLocation();
   const navigate = useNavigate();
+  const [detail, setDetail] = useState({});
 
   const formSignupHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/auth/signup`, {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        password: user.password,
-      });
+      const response = await axios.post(`/api/auth/signup`, detail);
       localStorage.setItem("token", response.data.encodedToken);
+      localStorage.setItem("user", JSON.stringify(response.data.createdUser));
       authDispatch({
         type: "TOKEN",
-        payload: response.data.encodedToken,
+        payload: {
+          token: response.data.encodedToken,
+          user: response.data.createdUser,
+        },
       });
       toast.success("Signup Successful");
       let from = location.state?.from?.pathname || "/home";
       navigate(from, { replace: true });
-    } catch (err) {
+    } catch (error) {
       authDispatch({
         type: "ERROR",
-        payload: "Something went wrong",
+        payload: error,
       });
       toast.error("Error occurred, please try again");
     }
@@ -52,9 +53,9 @@ function Signup() {
             placeholder="First Name"
             required
             onChange={(e) =>
-              authDispatch({
-                type: "FIRST_NAME",
-                payload: e.target.value,
+              setDetail({
+                ...detail,
+                firstName: e.target.value,
               })
             }
           />
@@ -68,9 +69,9 @@ function Signup() {
             placeholder="Last Name"
             required
             onChange={(e) =>
-              authDispatch({
-                type: "LAST_NAME",
-                payload: e.target.value,
+              setDetail({
+                ...detail,
+                lastName: e.target.value,
               })
             }
           />
@@ -84,7 +85,10 @@ function Signup() {
             placeholder="Email"
             required
             onChange={(e) =>
-              authDispatch({ type: "EMAIL", payload: e.target.value })
+              setDetail({
+                ...detail,
+                email: e.target.value,
+              })
             }
           />
         </div>
@@ -97,9 +101,9 @@ function Signup() {
             placeholder="Password"
             required
             onChange={(e) =>
-              authDispatch({
-                type: "PASSWORD",
-                payload: e.target.value,
+              setDetail({
+                ...detail,
+                password: e.target.value,
               })
             }
           />
@@ -112,12 +116,6 @@ function Signup() {
             className="password-input-field"
             placeholder="Re-Enter Password"
             required
-            onChange={(e) =>
-              authDispatch({
-                type: "CONFIRM_PASSWORD",
-                payload: e.target.value,
-              })
-            }
           />
         </div>
         <button

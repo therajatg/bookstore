@@ -1,0 +1,64 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  row-gap: 2rem;
+}
+
+.addNewBtn {
+  background-color: var(--primary-color-light);
+  color: white;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+  width: max-content;
+  align-self: center;
+}
+
+.addressContainer {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 3rem;
+}
+
+.detail {
+  color: black;
+  font-weight: 700;
+  box-shadow: var(--default-box-shadow);
+  min-height: 10rem;
+  min-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  line-height: 12px;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.detail:hover {
+  cursor: pointer;
+}
+
+.icons {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.edit,
+.delete {
+  font-size: 1.5rem;
+}
+
+.edit:hover,
+.delete:hover {
+  cursor: pointer;
+}
+
+.delete {
+  color: red;
+}

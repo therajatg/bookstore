@@ -1,0 +1,17 @@
+.detail {
+  color: black;
+  font-weight: 700;
+  box-shadow: var(--default-box-shadow);
+  min-height: 12rem;
+  min-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  line-height: 0;
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}

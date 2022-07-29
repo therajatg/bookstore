@@ -1,6 +1,6 @@
 import { FcSearch } from "react-icons/fc";
 import { AiFillHeart } from "react-icons/ai";
-import { FaBookOpen, FaShoppingCart } from "react-icons/fa";
+import { FaBookOpen, FaShoppingCart, FaUserAlt } from "react-icons/fa";
 import "./navbar.css";
 import { useAuth, useCart, useWishlist } from "../../contexts/index";
 import { useNavigate, Link } from "react-router-dom";
@@ -16,7 +16,14 @@ function Navbar() {
   function logoutHandler(e) {
     e.preventDefault();
     localStorage.removeItem("token");
-    authDispatch({ type: "TOKEN", payload: null });
+    localStorage.removeItem("user");
+    authDispatch({
+      type: "TOKEN",
+      payload: {
+        token: null,
+        user: null,
+      },
+    });
     toast.success("Logout Successful");
     navigate("/home");
   }
@@ -27,7 +34,7 @@ function Navbar() {
 
   return (
     <nav className="navigation-container">
-      <div className="logo" onClick={() => navigate("/")}>
+      <div className="logo" onClick={() => navigate("/home")}>
         <FaBookOpen className="iconSizeSmall" />
         <span className="font-size-m">Kitab</span>
       </div>
@@ -56,10 +63,12 @@ function Navbar() {
             Login
           </button>
         )}
-
+        <Link to="/profile">
+          <FaUserAlt className="iconSizeSmall" title="Profile" />
+        </Link>
         <Link to={token ? "/wishlist" : "/login"}>
           <div className="icon-button">
-            <AiFillHeart className="iconSizeLarge" />
+            <AiFillHeart className="iconSizeLarge" title="Wishlist" />
             <span className="icon-button__badge">
               {token ? wishlist.length : 0}
             </span>
@@ -67,7 +76,7 @@ function Navbar() {
         </Link>
         <Link to={token ? "/cart" : "/login"}>
           <div className="icon-button">
-            <FaShoppingCart className="iconSizeLarge" />
+            <FaShoppingCart className="iconSizeLarge" title="Cart" />
             <span className="icon-button__badge">
               {token ? cartItems.length : 0}
             </span>
