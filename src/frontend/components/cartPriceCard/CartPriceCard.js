@@ -2,10 +2,11 @@ import { useCart, useUserContext } from "../../contexts/index";
 import styles from "./cartPriceCard.module.css";
 import { loadScript } from "../../helperFunctions/index";
 import { toast } from "react-toastify";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate, Outlet, useLocation } from "react-router-dom";
 
 export function CartPriceCard() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { cartItems, setCartItems } = useCart();
   const { deliveryAddress } = useUserContext();
   const totalOldPrice = cartItems.reduce(
@@ -82,7 +83,7 @@ export function CartPriceCard() {
           </div>
         )}
 
-        {!deliveryAddress && (
+        {pathname === "/cart" && (
           <button
             className="button-contained add-to-cart-button margin-one font-size-s btn-no-border-no-color"
             onClick={() => navigate("/deliveryAddress")}
