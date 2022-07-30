@@ -1,5 +1,7 @@
 function filterReducer(state, action) {
   switch (action.type) {
+    case "SEARCH":
+      return { ...state, search: action.payload };
     case "RANGE":
       return { ...state, range: action.payload };
     case "CATEGORIES":
@@ -36,6 +38,12 @@ function filterReducer(state, action) {
     default:
       return state;
   }
+}
+
+function search(productListing, state) {
+  return productListing.filter((item) =>
+    item.title.toLowerCase().includes(state.search.trim().toLowerCase())
+  );
 }
 
 function rangeFilter(productListing, state) {
@@ -89,6 +97,7 @@ function deliveryFilter(productListing, state) {
 }
 
 const allfilterFunctions = [
+  search,
   rangeFilter,
   categoryFilter,
   ratingFilter,

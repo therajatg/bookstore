@@ -50,10 +50,11 @@ export function Address() {
           address?.map((add) => (
             <div
               className={style.detail}
+              key={add._id}
               onClick={() => {
                 if (pathname === "/deliveryAddress") {
                   setDeliveryAddress(add);
-                  navigate("/cart");
+                  navigate("/cart/checkout");
                 }
               }}
             >

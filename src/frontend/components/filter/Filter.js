@@ -35,7 +35,7 @@ export function Filter() {
         <h2>Category</h2>
         <ul>
           {allCategories.map((item) => (
-            <li>
+            <li key={item}>
               <input
                 type="checkbox"
                 id={item}

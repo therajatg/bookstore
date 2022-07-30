@@ -28,7 +28,7 @@ function CartProducts() {
           qty,
           categoryName,
         }) => (
-          <div className={styles.cardContainer}>
+          <div className={styles.cardContainer} key={_id}>
             <img
               className={styles.imgDimension}
               src={img}
@@ -60,7 +60,7 @@ function CartProducts() {
                 >
                   -
                 </button>
-                <input type="number" value={qty} className="font-size-m" />
+                <h2>{qty}</h2>
                 <button
                   className={`${styles.btn} font-size-m round-corner`}
                   onClick={() => incrementItem(_id, setCartItems, encodedToken)}
