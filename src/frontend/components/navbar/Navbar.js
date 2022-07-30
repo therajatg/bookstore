@@ -4,6 +4,7 @@ import { FaBookOpen, FaShoppingCart } from "react-icons/fa";
 import "./navbar.css";
 import { useAuth, useCart, useWishlist } from "../../contexts/index";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Navbar() {
   const { cartItems } = useCart();
@@ -16,7 +17,8 @@ function Navbar() {
     e.preventDefault();
     localStorage.removeItem("token");
     authDispatch({ type: "TOKEN", payload: null });
-    navigate("/");
+    toast.success("Logout Successful");
+    navigate("/home");
   }
 
   function loginHandler(e) {

@@ -1,6 +1,7 @@
-export { addToWishlist } from "./addToWishlist";
-export { removeFromWishlist } from "./removeFromWishlist";
-export { addToCart } from "./addToCart";
-export { removeFromCart } from "./removeFromCart";
-export { incrementItem } from "./incrementItem";
-export { decrementItem } from "./decrementItem";
+export { addToWishlist, removeFromWishlist } from "./wishlistHandler";
+export {
+  addToCart,
+  removeFromCart,
+  incrementItem,
+  decrementItem,
+} from "./cartHandler";

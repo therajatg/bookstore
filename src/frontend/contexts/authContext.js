@@ -14,9 +14,8 @@ function AuthProvider({ children }) {
       password: null,
       confirmPassword: null,
     },
-
     error: null,
-    token: localStorageToken,
+    token: localStorageToken ?? null,
   });
 
   return (
