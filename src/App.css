@@ -14,6 +14,11 @@
   --default-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.App {
+  width: 100vw;
+  min-height: 100vh;
+}
+
 .margin-one {
   margin: 3px;
 }

@@ -1,11 +1,19 @@
-import "./home.css";
-import { Products, Filter, Footer } from "../../components/index";
+import { ProductCard, Filter, Footer } from "../../components/index";
+import { useFilter } from "../../contexts/index";
+import style from "./home.module.css";
 
 function Home() {
+  const { finalProductList } = useFilter();
   return (
-    <div className="filterProductAndFooter">
-      <Filter />
-      <Products />
+    <div className={style.filterProductsAndFooter}>
+      <div className={style.filterAndProducts}>
+        <Filter />
+        <div className={style.products}>
+          {finalProductList.map((product) => (
+            <ProductCard product={product} />
+          ))}
+        </div>
+      </div>
       <Footer />
     </div>
   );

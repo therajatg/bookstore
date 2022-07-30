@@ -16,7 +16,7 @@ export function Filter() {
   return (
     <div className="filters">
       <div>
-        <h2>Price</h2>
+        <h2 className="filterPrice">Price</h2>
         <input
           type="range"
           min="1"

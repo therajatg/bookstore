@@ -1,0 +1,10 @@
+.filterAndProducts {
+  display: flex;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 4rem;
+  row-gap: 3rem;
+}

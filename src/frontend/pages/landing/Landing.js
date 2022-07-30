@@ -3,10 +3,12 @@ import { allCategories } from "../../constants/categories";
 import { useFilter } from "../../contexts/filterContext";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../../components/index";
+import { createElement } from "react";
 
 function Landing() {
   const { filterDispatch } = useFilter();
   const navigate = useNavigate();
+
   return (
     <div>
       <div className={styles.paddingTop}>

@@ -13,7 +13,8 @@ import { formatDate, requiresAuth } from "../utils/authUtils";
  * */
 
 export const getWishlistItemsHandler = function (schema, request) {
-  const userId = requiresAuth.call(this, request);
+  const user = requiresAuth.call(this, request);
+  const userId = user?._id;
   if (!userId) {
     new Response(
       404,
@@ -34,7 +35,8 @@ export const getWishlistItemsHandler = function (schema, request) {
  * */
 
 export const addItemToWishlistHandler = function (schema, request) {
-  const userId = requiresAuth.call(this, request);
+  const user = requiresAuth.call(this, request);
+  const userId = user?._id;
   try {
     if (!userId) {
       new Response(
@@ -72,7 +74,8 @@ export const addItemToWishlistHandler = function (schema, request) {
  * */
 
 export const removeItemFromWishlistHandler = function (schema, request) {
-  const userId = requiresAuth.call(this, request);
+  const user = requiresAuth.call(this, request);
+  const userId = user?._id;
   try {
     if (!userId) {
       new Response(
