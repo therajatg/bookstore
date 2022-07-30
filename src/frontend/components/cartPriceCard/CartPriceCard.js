@@ -71,7 +71,7 @@ export function CartPriceCard() {
         <p
           className={styles.green}
         >{`You will save ₹${totalDiscount} on this order`}</p>
-        {deliveryAddress && (
+        {pathname === "/cart/checkout" && (
           <div>
             <button
               className="button-contained add-to-cart-button margin-one font-size-s btn-no-border-no-color"
