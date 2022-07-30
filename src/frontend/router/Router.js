@@ -10,7 +10,7 @@ import {
   Profile,
   DeliveryAddress,
 } from "../pages/index";
-import { BasicInfo, Address } from "../components/index";
+import { BasicInfo, Address, Checkout } from "../components/index";
 import { RequiresAuth } from "./RequiresAuth";
 import Mockman from "mockman-js";
 import { Route, Routes } from "react-router-dom";
@@ -28,7 +28,9 @@ function Router() {
             <Cart />
           </RequiresAuth>
         }
-      />
+      >
+        <Route path="checkout" element={<Checkout />} />
+      </Route>
       <Route
         path="/wishlist"
         element={

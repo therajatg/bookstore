@@ -26,7 +26,7 @@ function WishlistProducts() {
           categoryName,
           oldPrice,
         }) => (
-          <div className={styles.cardContainer}>
+          <div className={styles.cardContainer} key={_id}>
             <img
               className={styles.imgDimension}
               src={img}

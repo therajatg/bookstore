@@ -2,7 +2,7 @@ import { FcSearch } from "react-icons/fc";
 import { AiFillHeart } from "react-icons/ai";
 import { FaBookOpen, FaShoppingCart, FaUserAlt } from "react-icons/fa";
 import "./navbar.css";
-import { useAuth, useCart, useWishlist } from "../../contexts/index";
+import { useAuth, useCart, useWishlist, useFilter } from "../../contexts/index";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -10,7 +10,8 @@ function Navbar() {
   const { cartItems } = useCart();
   const { wishlist } = useWishlist();
   const { authState, authDispatch } = useAuth();
-  const { user, token } = authState;
+  const { filterDispatch } = useFilter();
+  const { token } = authState;
   const navigate = useNavigate();
 
   function logoutHandler(e) {
@@ -44,7 +45,10 @@ function Navbar() {
           type="search"
           placeholder="Search..."
           className="nav-search-input"
-        ></input>
+          onChange={(e) =>
+            filterDispatch({ type: "SEARCH", payload: e.target.value })
+          }
+        />
         <FcSearch />
       </div>
       <div className="nav-options">

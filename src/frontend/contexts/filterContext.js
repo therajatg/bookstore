@@ -19,6 +19,7 @@ function FilterProvider({ children }) {
   const [productListing, setProductListing] = useState([]);
 
   const [filterState, filterDispatch] = useReducer(filterReducer, {
+    search: "",
     range: 2000,
     categories: [],
     filterByRating: false,

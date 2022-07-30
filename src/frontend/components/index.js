@@ -8,3 +8,4 @@ export { WishlistProducts } from "./wishlistProducts/WishlistProducts";
 export { Address } from "./address/Address";
 export { BasicInfo } from "./basicInfo/BasicInfo";
 export { AddressModal } from "./addressModal/AddressModal";
+export { Checkout } from "./checkout/Checkout";

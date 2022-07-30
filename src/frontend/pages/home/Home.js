@@ -10,7 +10,7 @@ function Home() {
         <Filter />
         <div className={style.products}>
           {finalProductList.map((product) => (
-            <ProductCard product={product} />
+            <ProductCard product={product} key={product._id} />
           ))}
         </div>
       </div>

@@ -2,7 +2,7 @@ import { useCart, useUserContext } from "../../contexts/index";
 import styles from "./cartPriceCard.module.css";
 import { loadScript } from "../../helperFunctions/index";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 
 export function CartPriceCard() {
   const navigate = useNavigate();
@@ -70,36 +70,25 @@ export function CartPriceCard() {
         <p
           className={styles.green}
         >{`You will save ₹${totalDiscount} on this order`}</p>
-        {deliveryAddress ? (
-          <button
-            className="button-contained add-to-cart-button margin-one font-size-s btn-no-border-no-color"
-            onClick={displayRazorpay}
-          >
-            Buy
-          </button>
-        ) : (
+        {deliveryAddress && (
+          <div>
+            <button
+              className="button-contained add-to-cart-button margin-one font-size-s btn-no-border-no-color"
+              onClick={displayRazorpay}
+            >
+              Buy
+            </button>
+            <Outlet />
+          </div>
+        )}
+
+        {!deliveryAddress && (
           <button
             className="button-contained add-to-cart-button margin-one font-size-s btn-no-border-no-color"
             onClick={() => navigate("/deliveryAddress")}
           >
             Place Order
           </button>
-        )}
-        {deliveryAddress && (
-          <div className={styles.address}>
-            <span>{deliveryAddress.name}</span>
-            <br />
-            <span>{deliveryAddress.area}</span>
-            <br />
-            <span>{deliveryAddress.locality}</span>
-            <br />
-            <span>
-              {deliveryAddress.city}, {deliveryAddress.state} -{" "}
-              {deliveryAddress.pincode}
-            </span>
-            <br />
-            <span>Contact: {deliveryAddress.mobile}</span>
-          </div>
         )}
       </div>
       <div>
