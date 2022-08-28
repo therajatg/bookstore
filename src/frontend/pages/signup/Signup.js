@@ -11,13 +11,20 @@ function Signup() {
   const location = useLocation();
   const navigate = useNavigate();
   const [detail, setDetail] = useState({});
+  const [dummy, setDummy] = useState(false);
 
   const formSignupHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/auth/signup`, detail);
+      let response;
+      if (dummy === true) {
+        response = await axios.post("/api/auth/login", detail);
+        localStorage.setItem("user", JSON.stringify(response.data.foundUser));
+      } else {
+        response = await axios.post(`/api/auth/signup`, detail);
+        localStorage.setItem("user", JSON.stringify(response.data.createdUser));
+      }
       localStorage.setItem("token", response.data.encodedToken);
-      localStorage.setItem("user", JSON.stringify(response.data.createdUser));
       authDispatch({
         type: "TOKEN",
         payload: {
@@ -38,7 +45,7 @@ function Signup() {
   };
 
   return (
-    <div className="center weightedText paddingTop">
+    <div className="center weightedText ">
       <form
         className="input-container ecom-placing-input-container"
         onSubmit={formSignupHandler}
@@ -51,6 +58,7 @@ function Signup() {
             id="firstName"
             className="name-input-field"
             placeholder="First Name"
+            value={detail.firstName}
             required
             onChange={(e) =>
               setDetail({
@@ -67,6 +75,7 @@ function Signup() {
             id="lastName"
             className="password-input-field"
             placeholder="Last Name"
+            value={detail.lastName}
             required
             onChange={(e) =>
               setDetail({
@@ -83,6 +92,7 @@ function Signup() {
             id="email"
             className="name-input-field"
             placeholder="Email"
+            value={detail.email}
             required
             onChange={(e) =>
               setDetail({
@@ -99,6 +109,7 @@ function Signup() {
             id="password"
             className="password-input-field"
             placeholder="Password"
+            value={detail.password}
             required
             onChange={(e) =>
               setDetail({
@@ -108,21 +119,22 @@ function Signup() {
             }
           />
         </div>
-        <div className="input-password">
-          <label htmlFor="confirmPassword">RE-ENTER PASSWORD:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            className="password-input-field"
-            placeholder="Re-Enter Password"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="btn-no-border-no-color ecom-center-inside-flex"
-        >
+        <button className="btn-no-border-no-color ecom-center-inside-flex">
           <h2>CREATE</h2>
+        </button>
+        <button
+          className="btn-no-border-no-color ecom-center-inside-flex"
+          onClick={() => {
+            setDetail({
+              firstName: "dummy",
+              lastName: "Bro",
+              email: "rajat@gmail.com",
+              password: "rajatgupta",
+            });
+            setDummy(true);
+          }}
+        >
+          <h2 className="dummySignup">Dummy Signup</h2>
         </button>
       </form>
       <h4 className="error__message">{error}</h4>

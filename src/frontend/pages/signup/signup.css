@@ -16,3 +16,7 @@
   display: flex;
   justify-content: center;
 }
+
+.dummySignup {
+  margin-top: -2rem;
+}
