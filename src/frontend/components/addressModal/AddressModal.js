@@ -9,6 +9,7 @@ export function AddressModal({
   edit,
   setEdit,
   addressToEdit,
+  addAddress,
 }) {
   console.log(addressToEdit);
   const [addressInput, setAddressInput] = useState({});
@@ -32,8 +33,18 @@ export function AddressModal({
   };
 
   return (
-    <div className={style.wrapper} onClick={() => setModal(false)}>
-      <div onClick={(e) => e.stopPropagation()} className={style.infoDiv}>
+    <div
+      className={style.wrapper}
+      onClick={() => {
+        setModal(false);
+        setEdit(false);
+      }}
+    >
+      <form
+        onClick={(e) => e.stopPropagation()}
+        className={style.infoDiv}
+        onubmit={submitAddress}
+      >
         <div className={style.horizontalInputs}>
           <div>
             <label htmlFor="">Name</label>
@@ -44,6 +55,7 @@ export function AddressModal({
               onChange={handleChange}
               value={addressInput?.name}
               name="name"
+              required
             />
           </div>
           <div>
@@ -55,6 +67,7 @@ export function AddressModal({
               onChange={handleChange}
               value={addressInput.mobile}
               name="mobile"
+              required
             />
           </div>
         </div>
@@ -68,6 +81,7 @@ export function AddressModal({
               onChange={handleChange}
               value={addressInput.area}
               name="area"
+              required
             />
           </div>
           <div>
@@ -92,6 +106,7 @@ export function AddressModal({
               onChange={handleChange}
               value={addressInput.pincode}
               name="pincode"
+              required
             />
           </div>
           <div>
@@ -119,7 +134,7 @@ export function AddressModal({
             />
           </div>
           <div>
-            <label htmlFor="">Select State</label>
+            <label htmlFor="">State</label>
             <br />
             <input
               type="text"
@@ -134,11 +149,11 @@ export function AddressModal({
         <button className={style.cancelBtn} onClick={() => setModal(false)}>
           Cancel
         </button>
-        <button className={style.submitAddress} onClick={submitAddress}>
+        <button className={style.submitAddress}>
           {!edit && <span>Add Address</span>}
           {edit && <span>Edit Address</span>}
         </button>
-      </div>
+      </form>
     </div>
   );
 }

@@ -19,7 +19,17 @@ export function ProductCard({ product }) {
     _id,
     categoryName,
     oldPrice,
-  } = product;
+  } = product ?? {
+    img: null,
+    title: null,
+    author: null,
+    rating: null,
+    fastDelivery: null,
+    price: null,
+    _id: null,
+    categoryName: null,
+    oldPrice: null,
+  };
   const navigate = useNavigate();
   const location = useLocation();
   const { authState } = useAuth();
@@ -29,7 +39,7 @@ export function ProductCard({ product }) {
 
   return (
     <div className={` ${styles.cardContainer}`} key={_id}>
-      {wishlist.find((item) => item._id === _id) ? (
+      {wishlist?.find((item) => item?._id === _id) ? (
         <AiFillHeart
           className={`heart-position ${styles.redColor} iconSizeSmall heart-hover`}
           onClick={() =>
@@ -81,7 +91,7 @@ export function ProductCard({ product }) {
           </span>
         </span>
       </Link>
-      {cartItems.find((item) => item._id === _id) ? (
+      {cartItems?.find((item) => item._id === _id) ? (
         <button
           className="button-contained add-to-cart-button margin-one font-size-s btn-no-border-no-color"
           onClick={() => navigate("/cart")}

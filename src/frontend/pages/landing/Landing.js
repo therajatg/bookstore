@@ -3,7 +3,6 @@ import { allCategories } from "../../constants/categories";
 import { useFilter } from "../../contexts/filterContext";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../../components/index";
-import { createElement } from "react";
 
 function Landing() {
   const { filterDispatch } = useFilter();
@@ -16,6 +15,12 @@ function Landing() {
           <h1 className={`font-size-xl ${styles.h1}`}>
             Go where the stories take you
           </h1>
+          <li
+            class="stacked-list-item font-size-m"
+            onClick={() => navigate("/home")}
+          >
+            All Books
+          </li>
           {allCategories.map((item) => (
             <li
               class="stacked-list-item font-size-m"

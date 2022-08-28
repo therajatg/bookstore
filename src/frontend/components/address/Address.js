@@ -16,6 +16,7 @@ export function Address() {
   const [modal, setModal] = useState(false);
   const [edit, setEdit] = useState(false);
   const [addressToEdit, setaddressToEdit] = useState(false);
+  const [addAddress, setAddAddress] = useState(false);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -33,8 +34,6 @@ export function Address() {
 
   const userId = user?._id;
 
-  const addNewAddress = () => {};
-
   useEffect(() => {
     getAddress(token, userDispatch);
   }, []);
@@ -42,33 +41,39 @@ export function Address() {
   return (
     <div className={style.main}>
       {address?.length === 0 && <div>No address available</div>}
-      <button className={style.addNewBtn} onClick={() => setModal(true)}>
+      <button
+        className={style.addNewBtn}
+        onClick={() => {
+          setModal(true);
+          setAddAddress(true);
+        }}
+      >
         Add New Address
       </button>
       <div className={style.addressContainer}>
         {address?.length > 0 &&
           address?.map((add) => (
-            <div
-              className={style.detail}
-              key={add._id}
-              onClick={() => {
-                if (pathname === "/deliveryAddress") {
-                  setDeliveryAddress(add);
-                  navigate("/cart/checkout");
-                }
-              }}
-            >
-              <span>{add?.name}</span>
-              <br />
-              <span>{add?.area}</span>
-              <br />
-              <span>{add?.locality}</span>
-              <br />
-              <span>
-                {add?.city}, {add?.state} - {add?.pincode}
-              </span>
-              <br />
-              <span>Contact: {add?.mobile}</span>
+            <div className={style.detail} key={add._id}>
+              <div
+                onClick={() => {
+                  if (pathname === "/deliveryAddress") {
+                    setDeliveryAddress(add);
+                    navigate("/cart/checkout");
+                  }
+                }}
+              >
+                <span>{add?.name}</span>
+                <br />
+                <span>{add?.area}</span>
+                <br />
+                <span>{add?.locality}</span>
+                <br />
+                <span>
+                  {add?.city}, {add?.state} - {add?.pincode}
+                </span>
+                <br />
+                <span>Contact: {add?.mobile}</span>
+              </div>
               <div className={style.icons}>
                 <FaEdit
                   className={style.edit}
@@ -94,6 +99,7 @@ export function Address() {
           edit={edit}
           setEdit={setEdit}
           addressToEdit={addressToEdit}
+          addAddress={addAddress}
         />
       )}
     </div>

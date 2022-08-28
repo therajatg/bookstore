@@ -6,6 +6,10 @@
   row-gap: 2rem;
 }
 
+span {
+  line-height: 1.2rem;
+}
+
 .addNewBtn {
   background-color: var(--primary-color-light);
   color: white;
